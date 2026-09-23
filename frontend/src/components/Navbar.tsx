@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-4 z-40 px-4 sm:px-6 w-full max-w-[1180px] mx-auto">
+      <header className="sticky top-4 z-50 px-4 sm:px-6 w-full max-w-[1180px] mx-auto">
         <nav className="bg-black text-white rounded-full px-6 sm:px-8 py-3 sm:py-3.5 flex items-center justify-between shadow-2xl backdrop-blur-md border border-neutral-800 transition-all duration-300">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-1 group shrink-0">

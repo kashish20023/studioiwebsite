@@ -52,7 +52,7 @@ export default function TestimonialsSection() {
   const rightCards = testimonials.slice(2, 4);
 
   return (
-    <section id="experience" className="py-12 sm:py-16 px-4 sm:px-6 max-w-[1180px] mx-auto">
+    <section id="experience" className="py-12 sm:py-16 max-sm:py-6 px-4 sm:px-6 max-w-[1180px] mx-auto">
       {/* Section Header */}
       <div className="text-center mb-10 sm:mb-12">
         <span className="text-[#FF007A] font-semibold text-sm tracking-widest uppercase block mb-1">

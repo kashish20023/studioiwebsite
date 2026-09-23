@@ -30,7 +30,7 @@ export default function FeaturedLocations() {
         {locations.map((loc) => (
           <div
             key={loc.id}
-            className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-black shadow-xl border border-neutral-900 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
+            className="group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-black shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer"
           >
             {/* Image Container with Zoom effect */}
             <div className="relative aspect-[16/10] w-full overflow-hidden">

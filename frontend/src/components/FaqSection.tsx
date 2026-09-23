@@ -45,9 +45,9 @@ export default function FaqSection() {
   };
 
   return (
-    <section className="py-14 sm:py-20 px-4 sm:px-6 max-w-[1180px] mx-auto">
+    <section className="py-14 sm:py-20 max-sm:py-8 px-4 sm:px-6 max-w-[1180px] mx-auto">
       {/* Top Tag & Main Headline */}
-      <div className="text-center mb-12 sm:mb-16">
+      <div className="text-center mb-12 sm:mb-16 max-sm:mb-8">
         <span className="text-[#FF007A] font-semibold text-sm tracking-widest uppercase block mb-2">
           Our Testimonial
         </span>
@@ -61,7 +61,7 @@ export default function FaqSection() {
       </div>
 
       {/* 2-Column Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-12 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 max-sm:gap-2 sm:gap-12 items-start">
         {/* Left Column: Quick Contact Info */}
         <div className="lg:col-span-4 lg:sticky lg:top-28">
           <h3 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 tracking-tight leading-snug">
@@ -88,7 +88,7 @@ export default function FaqSection() {
             return (
               <div
                 key={faq.question}
-                className="border-t border-neutral-900/90 py-5 sm:py-6 transition-colors"
+                className="border-t border-neutral-900/90 py-5 max-sm:py-3 sm:py-6 transition-colors"
               >
                 <button
                   type="button"
@@ -100,9 +100,8 @@ export default function FaqSection() {
                     {faq.question}
                   </span>
                   <div
-                    className={`w-9 h-9 rounded-full bg-neutral-200 group-hover:bg-[#FF007A] group-hover:text-white flex items-center justify-center shrink-0 transition-all duration-300 ${
-                      isOpen ? "bg-[#FF007A] text-white rotate-90" : "text-neutral-800"
-                    }`}
+                    className={`w-9 h-9 rounded-full bg-neutral-200 group-hover:bg-[#FF007A] group-hover:text-white flex items-center justify-center shrink-0 transition-all duration-300 ${isOpen ? "bg-[#FF007A] text-white rotate-90" : "text-neutral-800"
+                      }`}
                   >
                     <ArrowRight className="w-4 h-4 stroke-[2.5]" />
                   </div>

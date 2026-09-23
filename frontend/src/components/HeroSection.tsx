@@ -3,10 +3,11 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import WorkspaceInfiniteSlider from "@/components/WorkspaceInfiniteSlider";
 
 export default function HeroSection() {
   return (
-    <section className="pt-8 sm:pt-10 pb-8 px-4 sm:px-6 relative overflow-hidden">
+    <section className="pt-6 sm:pt-8 pb-6 sm:pb-8 px-2 sm:px-4 relative overflow-x-clip">
       {/* Container for Headline & Doodles */}
       <div className="max-w-[1100px] mx-auto text-center relative px-4">
         {/* Left Doodle: Some Space New Possibilities with complete arrow */}
@@ -37,46 +38,23 @@ export default function HeroSection() {
         </div>
 
         {/* Main Heading */}
-        <h1 className="text-4xl sm:text-5xl md:text-[58px] font-black tracking-tight text-neutral-950 leading-[1.12]">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-neutral-950 leading-[1.12]">
           A Workspace for{" "}
-          <span className="text-[#FF007A]">
+          <span className="text-[#FF007A] italic">
             Every You
           </span>
         </h1>
 
         {/* Subtitle */}
-        <p className="mt-3.5 text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto font-normal leading-relaxed">
+        <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-xl mx-auto font-normal leading-relaxed">
           Flexible desks, private cabins, meeting rooms and more — book inspiring coworking spaces
           instantly, anytime, anywhere.
         </p>
       </div>
 
-      {/* Visual Showcase Strip (Central Phone Mockup + Categories) */}
-      <div className="relative mt-8 sm:mt-10 max-w-[1180px] mx-auto">
-        {/* Main Clean Gallery Strip Image */}
-        <div className="relative w-full rounded-2xl overflow-hidden">
-          <Image
-            src="/assets/hero-gallery-strip-clean.png"
-            alt="Studio i Coworking Spaces & App Experience"
-            width={2955}
-            height={930}
-            priority
-            className="w-full h-auto object-cover select-none"
-          />
-
-          {/* Smooth Bottom Gradient Fade to pure white background */}
-          <div className="absolute inset-x-0 bottom-0 h-24 sm:h-28 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
-        </div>
-
-        {/* CTA Button overlapping the bottom edge of the phone mockup */}
-        <div className="relative -mt-10 sm:-mt-12 z-20 flex justify-center">
-          <Link
-            href="#locations"
-            className="inline-flex items-center justify-center bg-black hover:bg-neutral-900 text-white font-semibold px-8 sm:px-10 py-3.5 sm:py-4 rounded-full text-[15px] sm:text-base shadow-xl hover:shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300 border border-neutral-800"
-          >
-            Find Your Perfect Workspace
-          </Link>
-        </div>
+      {/* Visual Showcase Strip: Continuous Infinite Slider with Central Phone Highlighting */}
+      <div className="relative mt-2 sm:mt-3 w-full">
+        <WorkspaceInfiniteSlider />
       </div>
     </section>
   );
