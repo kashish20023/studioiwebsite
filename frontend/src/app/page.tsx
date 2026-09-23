@@ -26,7 +26,7 @@ export default function Home() {
       <FeaturedLocations />
 
       {/* Section Divider Matching Canva */}
-      <div className="max-w-[1180px] mx-auto w-full px-4 sm:px-6 my-10 sm:my-14">
+      <div className="max-w-[1180px] mx-auto w-full px-4 sm:px-6 my-10 max-sm:my-4 sm:my-14">
         <div className="border-t border-neutral-300 w-full" />
       </div>
 
@@ -34,7 +34,7 @@ export default function Home() {
       <TestimonialsSection />
 
       {/* Section Divider Matching Canva */}
-      <div className="max-w-[1180px] mx-auto w-full px-4 sm:px-6 my-10 sm:my-14">
+      <div className="max-w-[1180px] mx-auto w-full px-4 sm:px-6 my-10 max-sm:my-4 sm:my-14">
         <div className="border-t border-neutral-300 w-full" />
       </div>
 

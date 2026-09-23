@@ -91,7 +91,7 @@ function FaqSection() {
         className: "py-14 sm:py-20 max-sm:py-8 px-4 sm:px-6 max-w-[1180px] mx-auto",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "text-center mb-12 sm:mb-16",
+                className: "text-center mb-12 sm:mb-16 max-sm:mb-8",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         className: "text-[#FF007A] font-semibold text-sm tracking-widest uppercase block mb-2",
@@ -2383,24 +2383,28 @@ function WorkspaceInfiniteSlider() {
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "relative w-full flex items-center justify-center min-h-[460px] sm:min-h-[500px] md:min-h-[540px] pb-8 sm:pb-12",
+                className: "relative w-full flex items-center justify-center min-h-[500px] sm:min-h-[560px] md:min-h-[620px] pb-10 sm:pb-14",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         ref: phoneContainerRef,
                         className: "absolute z-30 pointer-events-none flex flex-col items-center justify-center select-none translate-y-2.5 sm:translate-y-3",
                         style: {
-                            width: "clamp(356px, 21.5vw, 408px)",
-                            aspectRatio: "612 / 904"
+                            width: "clamp(310px, 25vw, 380px)",
+                            aspectRatio: "698 / 1124"
                         },
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 ref: phoneScreenRef,
-                                className: "absolute overflow-hidden rounded-[30px] sm:rounded-[36px]",
+                                className: "absolute overflow-hidden rounded-[30px] sm:rounded-[36px] md:rounded-[42px]",
                                 style: {
-                                    left: "16.41%",
-                                    top: "4.31%",
-                                    width: "67.38%",
-                                    height: "91.81%"
+                                    // left: "17.05%",
+                                    // top: "5.66%",
+                                    // width: "65.62%",
+                                    // height: "88.97%",
+                                    left: "16.05%",
+                                    top: "2.80%",
+                                    width: "68.62%",
+                                    height: "99.97%"
                                 },
                                 children: [
                                     WORKSPACE_CATEGORIES.map((cat, idx)=>{
@@ -2409,27 +2413,27 @@ function WorkspaceInfiniteSlider() {
                                             className: `absolute inset-0 transition-opacity duration-700 ease-in-out ${isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"}`,
                                             "aria-hidden": !isActive,
                                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "relative w-full h-full overflow-hidden bg-neutral-100",
+                                                className: "relative w-full h-full overflow-hidden",
                                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
                                                     src: cat.topImg,
                                                     alt: cat.title,
                                                     fill: true,
-                                                    sizes: "(max-width: 640px) 260px, 310px",
+                                                    sizes: "(max-width: 640px) 400px, 600px",
                                                     className: "object-cover object-center select-none",
                                                     priority: true
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                                    lineNumber: 191,
+                                                    lineNumber: 193,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                                lineNumber: 190,
+                                                lineNumber: 192,
                                                 columnNumber: 19
                                             }, this)
                                         }, `phone-cat-${cat.id}`, false, {
                                             fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                            lineNumber: 184,
+                                            lineNumber: 186,
                                             columnNumber: 17
                                         }, this);
                                     }),
@@ -2441,7 +2445,7 @@ function WorkspaceInfiniteSlider() {
                                         }
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                        lineNumber: 206,
+                                        lineNumber: 208,
                                         columnNumber: 13
                                     }, this)
                                 ]
@@ -2456,17 +2460,18 @@ function WorkspaceInfiniteSlider() {
                                     src: "/assets/phone-frame-extended.png",
                                     alt: "Studio i workspace preview frame",
                                     fill: true,
-                                    sizes: "(max-width: 640px) 285px, 345px",
-                                    className: "object-contain select-none pointer-events-none drop-shadow-[0_24px_50px_rgba(0,0,0,0.24)]",
+                                    sizes: "(max-width: 640px) 400px, 600px",
+                                    quality: 95,
+                                    className: "object-fill select-none pointer-events-none drop-shadow-[0_24px_50px_rgba(0,0,0,0.25)]",
                                     priority: true
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                    lineNumber: 218,
+                                    lineNumber: 220,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                lineNumber: 217,
+                                lineNumber: 219,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2477,12 +2482,12 @@ function WorkspaceInfiniteSlider() {
                                     children: "Find Your Perfect Workspace"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                    lineNumber: 230,
+                                    lineNumber: 233,
                                     columnNumber: 13
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                lineNumber: 229,
+                                lineNumber: 232,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -2522,12 +2527,12 @@ function WorkspaceInfiniteSlider() {
                                                         priority: index < 6
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                                        lineNumber: 264,
+                                                        lineNumber: 267,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                                    lineNumber: 263,
+                                                    lineNumber: 266,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2541,18 +2546,18 @@ function WorkspaceInfiniteSlider() {
                                                         priority: index < 6
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                                        lineNumber: 276,
+                                                        lineNumber: 279,
                                                         columnNumber: 23
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                                    lineNumber: 275,
+                                                    lineNumber: 278,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                            lineNumber: 261,
+                                            lineNumber: 264,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2563,7 +2568,7 @@ function WorkspaceInfiniteSlider() {
                                                     children: item.title
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                                    lineNumber: 289,
+                                                    lineNumber: 292,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2571,30 +2576,30 @@ function WorkspaceInfiniteSlider() {
                                                     children: item.subtitle
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                                    lineNumber: 295,
+                                                    lineNumber: 298,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                            lineNumber: 288,
+                                            lineNumber: 291,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, `bg-${item.id}-${index}`, true, {
                                     fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                                    lineNumber: 253,
+                                    lineNumber: 256,
                                     columnNumber: 17
                                 }, this);
                             })
                         }, void 0, false, {
                             fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                            lineNumber: 241,
+                            lineNumber: 244,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/WorkspaceInfiniteSlider.tsx",
-                        lineNumber: 240,
+                        lineNumber: 243,
                         columnNumber: 9
                     }, this)
                 ]

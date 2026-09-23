@@ -47,7 +47,7 @@ export default function FaqSection() {
   return (
     <section className="py-14 sm:py-20 max-sm:py-8 px-4 sm:px-6 max-w-[1180px] mx-auto">
       {/* Top Tag & Main Headline */}
-      <div className="text-center mb-12 sm:mb-16">
+      <div className="text-center mb-12 sm:mb-16 max-sm:mb-8">
         <span className="text-[#FF007A] font-semibold text-sm tracking-widest uppercase block mb-2">
           Our Testimonial
         </span>

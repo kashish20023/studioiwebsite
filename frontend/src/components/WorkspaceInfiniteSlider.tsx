@@ -154,27 +154,29 @@ export default function WorkspaceInfiniteSlider() {
       <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 md:w-28 bg-gradient-to-l from-white via-white/70 to-transparent z-20 pointer-events-none" />
 
       {/* Main Relative Container holding both the background track and stationary Phone Frame */}
-      <div className="relative w-full flex items-center justify-center min-h-[460px] sm:min-h-[500px] md:min-h-[540px] pb-8 sm:pb-12">
+      <div className="relative w-full flex items-center justify-center min-h-[500px] sm:min-h-[560px] md:min-h-[620px] pb-10 sm:pb-14">
         {/* Stationary Central Mobile Phone (z-30: ON TOP OF SLIDER TRACK) */}
         {/* translate-y-2.5 sm:translate-y-3 anchors the phone top edge in place while extending downward */}
         <div
           ref={phoneContainerRef}
           className="absolute z-30 pointer-events-none flex flex-col items-center justify-center select-none translate-y-2.5 sm:translate-y-3"
           style={{
-            width: "clamp(356px, 21.5vw, 408px)",
-            aspectRatio: "612 / 904",
+            width: "clamp(310px, 25vw, 380px)",
+            aspectRatio: "698 / 1124",
           }}
         >
-          {/* Inner Screen Aperture Container: accurately clipped to the bezel opening */}
-          {/* Measured coordinates for extended 512x904 asset: left 16.41%, top 4.31%, width 67.38%, height 91.81% */}
+          {/* Inner Screen Aperture Container: accurately clipped to the user frame bezel opening */}
+          {/* Measured coordinates for user frame asset (698x1024): left 17.05%, top 5.66%, width 65.62%, height 88.97% */}
           <div
             ref={phoneScreenRef}
-            className="absolute overflow-hidden rounded-[30px] sm:rounded-[36px]"
+            className="absolute overflow-hidden rounded-[30px] sm:rounded-[36px] md:rounded-[42px]"
             style={{
-              left: "16.41%",
-              top: "4.31%",
-              width: "67.38%",
-              height: "91.81%",
+              // left: "17.05%",
+              // top: "5.66%",
+              // width: "65.62%",
+              // height: "88.97%",
+
+              left: "16.05%", top: "2.80%", width: "68.62%", height: "99.97%"
             }}
           >
             {/* Layer 1: Smooth Cross-Fading Active Workspace Image (Single Large Display) */}
@@ -187,12 +189,12 @@ export default function WorkspaceInfiniteSlider() {
                     }`}
                   aria-hidden={!isActive}
                 >
-                  <div className="relative w-full h-full overflow-hidden bg-neutral-100">
+                  <div className="relative w-full h-full overflow-hidden">
                     <Image
                       src={cat.topImg}
                       alt={cat.title}
                       fill
-                      sizes="(max-width: 640px) 260px, 310px"
+                      sizes="(max-width: 640px) 400px, 600px"
                       className="object-cover object-center select-none"
                       priority
                     />
@@ -213,14 +215,15 @@ export default function WorkspaceInfiniteSlider() {
             />
           </div>
 
-          {/* Layer 3: Complete Extended Phone Frame Asset (Above screen content & gradient) */}
+          {/* Layer 3: Complete User Phone Frame Asset (Above screen content & gradient) */}
           <div className="absolute inset-0 pointer-events-none z-30">
             <Image
               src="/assets/phone-frame-extended.png"
               alt="Studio i workspace preview frame"
               fill
-              sizes="(max-width: 640px) 285px, 345px"
-              className="object-contain select-none pointer-events-none drop-shadow-[0_24px_50px_rgba(0,0,0,0.24)]"
+              sizes="(max-width: 640px) 400px, 600px"
+              quality={95}
+              className="object-fill select-none pointer-events-none drop-shadow-[0_24px_50px_rgba(0,0,0,0.25)]"
               priority
             />
           </div>
