@@ -12,7 +12,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: "Studio i | A Workspace for Every You",
   description:
-    "Flexible desks, private cabins, meeting rooms and more — book inspiring coworking spaces instantly, anytime, anywhere at Studio i in Jaipur and Alwar.",
+    "Flexible desks, private cabins, meeting rooms and more — book inspiring coworking spaces instantly, anytime, anywhere at Studio i in Jaipur.",
   keywords: [
     "Studio i",
     "Coworking space Jaipur",

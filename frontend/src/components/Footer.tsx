@@ -100,12 +100,12 @@ export default function Footer() {
 
           {/* Column 3: Location */}
           <div className="md:col-span-4 lg:col-span-4">
-            <h4 className="text-base font-bold text-white mb-4">Location</h4>
+            <h4 className="text-base font-bold text-white mb-4">Flagship Location</h4>
             <div className="flex flex-col gap-3 text-sm text-white/90">
               <p className="leading-relaxed">
-                1 Rathore Bhawan Near Jaipaltaln, Alwar
+                A Tower - 1st Floor, Lehariya | KGK Realty, Near Jawahar Circle, Malviya Nagar, Jaipur
                 <br />
-                Rajasthan, 301001, India
+                Rajasthan, 302017, India
               </p>
               <p className="font-semibold text-white">Available Daily: 8am - 11pm</p>
             </div>

@@ -13,6 +13,7 @@ export default function FeaturedLocations() {
       rating: "4.5/5",
       image: "/assets/building-lehariya.png",
       tag: "Flagship Campus",
+      slug: "lehariya-jaipur"
     },
     {
       id: "horizon",
@@ -21,12 +22,13 @@ export default function FeaturedLocations() {
       rating: "4.3/5",
       image: "/assets/building-horizon.png",
       tag: "Premium Executive",
+      slug: "horizon-jaipur",
     },
   ];
 
   return (
-    <section id="locations" className="py-8 sm:py-10 px-2 sm:px-2 max-w-[1280px] mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+    <section id="locations" className="py-6 sm:py-10 px-4 sm:px-6 max-w-[1280px] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8">
         {locations.map((loc) => (
           <div
             key={loc.id}
@@ -43,32 +45,30 @@ export default function FeaturedLocations() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20" />
 
-              {/* Tag Pill */}
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-neutral-900 text-xs font-semibold px-3 py-1 rounded-full shadow">
-                {loc.tag}
-              </div>
             </div>
 
             {/* Bottom Dark Info Bar */}
-            <div className="bg-black px-5 sm:px-7 py-4 sm:py-5 flex items-center justify-between text-white border-t border-neutral-800/80">
-              <div className="flex-1 pr-4">
-                <h3 className="text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-[#FF007A] transition-colors flex items-center gap-1.5">
-                  <span>{loc.title}</span>
-                </h3>
-                <p className="text-xs text-neutral-400 mt-0.5 flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-[#FF007A]" />
-                  <span>{loc.subtitle}</span>
-                </p>
-              </div>
+            <a href={`/workspaces/${loc.slug}`} className="block">
+              <div className="bg-black px-4 sm:px-7 py-3.5 sm:py-5 flex items-center justify-between text-white border-t border-neutral-800/80 gap-3">
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-sm sm:text-lg font-bold tracking-tight text-white group-hover:text-[#FF007A] transition-colors flex items-center gap-1.5 truncate">
+                    <span className="truncate">{loc.title}</span>
+                  </h3>
+                  <p className="text-[11px] sm:text-xs text-neutral-400 mt-0.5 flex items-center gap-1 truncate">
+                    <MapPin className="w-3 h-3 text-[#FF007A] shrink-0" />
+                    <span className="truncate">{loc.subtitle}</span>
+                  </p>
+                </div>
 
-              {/* Rating */}
-              <div className="flex items-center gap-1.5 bg-neutral-900 px-3 py-1.5 rounded-full border border-neutral-800 shrink-0">
-                <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
-                <span className="text-sm font-bold text-white tracking-wider">
-                  {loc.rating}
-                </span>
+                {/* Rating */}
+                <div className="flex items-center gap-1.5 bg-neutral-900 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full border border-neutral-800 shrink-0">
+                  <Star className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-amber-400 fill-amber-400" />
+                  <span className="text-xs sm:text-sm font-bold text-white tracking-wider">
+                    {loc.rating}
+                  </span>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         ))}
       </div>
