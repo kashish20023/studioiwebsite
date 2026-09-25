@@ -41,7 +41,7 @@
 | **Database Credentials** | `postgres:Password%40246@localhost:5432` | Verified via direct connection test |
 | **Studio I Dev Database** | Task-owned isolated target: `studioi_dev` | Isolated from FairBnB and all other databases |
 | **Studio I QA Database** | Disposable test target: `studioi_qa_run_20260922` | Isolated from `studioi_dev` and shared databases |
-| **Ports** | `3000` (Studio I Frontend), `5001` (Studio I Backend) | Verified free / currently serving frontend |
+| **Ports** | `3000` (Studio I Frontend), `5002` (Studio I Backend) | Verified free / currently serving frontend |
 
 ---
 

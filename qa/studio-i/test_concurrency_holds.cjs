@@ -1,4 +1,4 @@
-const API = 'http://localhost:5001/api/v1';
+const API = 'http://localhost:5002/api/v1';
 
 async function testConcurrency() {
   console.log('=== CONCURRENCY TEST: 20 SYNCHRONIZED COMPETING HOLDS FOR SAME UNIT ===\n');

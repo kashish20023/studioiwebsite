@@ -148,91 +148,105 @@ export default function WorkspaceInfiniteSlider() {
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* Left Edge Smooth Gradient Overlay — subtle fade so images bleed naturally */}
-      <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 md:w-28 bg-gradient-to-r from-white via-white/70 to-transparent z-20 pointer-events-none" />
+      <div className="absolute left-0 top-0 bottom-0 w-8 sm:w-16 md:w-28 bg-gradient-to-r from-white via-white/70 to-transparent z-20 pointer-events-none" />
 
       {/* Right Edge Smooth Gradient Overlay */}
-      <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 md:w-28 bg-gradient-to-l from-white via-white/70 to-transparent z-20 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-8 sm:w-16 md:w-28 bg-gradient-to-l from-white via-white/70 to-transparent z-20 pointer-events-none" />
 
       {/* Main Relative Container holding both the background track and stationary Phone Frame */}
-      <div className="relative w-full flex items-center justify-center min-h-[500px] sm:min-h-[560px] md:min-h-[620px] pb-10 sm:pb-14">
+      <div className="relative w-full flex items-center justify-center min-h-[470px] xs:min-h-[490px] sm:min-h-[580px] md:min-h-[640px] lg:min-h-[690px] pt-2 sm:pt-4 lg:pt-6 pb-12 sm:pb-16 lg:pb-20">
         {/* Stationary Central Mobile Phone (z-30: ON TOP OF SLIDER TRACK) */}
-        {/* translate-y-2.5 sm:translate-y-3 anchors the phone top edge in place while extending downward */}
+        {/* Sleek, symmetric black iPhone frame matching exact design */}
         <div
           ref={phoneContainerRef}
-          className="absolute z-30 pointer-events-none flex flex-col items-center justify-center select-none translate-y-2.5 sm:translate-y-3"
+          className="absolute z-30 pointer-events-none flex flex-col items-center justify-center select-none w-[210px] xs:w-[225px] sm:w-[260px] md:w-[285px] lg:w-[300px]"
           style={{
-            width: "clamp(310px, 25vw, 380px)",
-            aspectRatio: "698 / 1124",
+            aspectRatio: "9 / 18.5",
           }}
         >
-          {/* Inner Screen Aperture Container: accurately clipped to the user frame bezel opening */}
-          {/* Measured coordinates for user frame asset (698x1024): left 17.05%, top 5.66%, width 65.62%, height 88.97% */}
-          <div
-            ref={phoneScreenRef}
-            className="absolute overflow-hidden rounded-[30px] sm:rounded-[36px] md:rounded-[42px]"
-            style={{
-              // left: "17.05%",
-              // top: "5.66%",
-              // width: "65.62%",
-              // height: "88.97%",
-
-              left: "16.05%", top: "2.80%", width: "68.62%", height: "99.97%"
-            }}
-          >
-            {/* Layer 1: Smooth Cross-Fading Active Workspace Image (Single Large Display) */}
-            {WORKSPACE_CATEGORIES.map((cat, idx) => {
-              const isActive = idx === activeIndex;
-              return (
-                <div
-                  key={`phone-cat-${cat.id}`}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
-                    }`}
-                  aria-hidden={!isActive}
-                >
-                  <div className="relative w-full h-full overflow-hidden">
-                    <Image
-                      src={cat.topImg}
-                      alt={cat.title}
-                      fill
-                      sizes="(max-width: 640px) 400px, 600px"
-                      className="object-cover object-center select-none"
-                      priority
-                    />
-                  </div>
-                </div>
-              );
-            })}
-
-            {/* Layer 2: Soft White Bottom Gradient Fade inside phone screen */}
-            {/* Begins around lower portion of screen and gradually fades toward bottom */}
+          {/* Outer Chassis: Sleek obsidian black bezel with polished rounded corners & subtle depth */}
+          <div className="relative w-full h-full rounded-[34px] xs:rounded-[38px] sm:rounded-[46px] md:rounded-[50px] p-[4px] sm:p-[5px] md:p-[6px] bg-[#0c0c0e] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35),0_0_0_1px_rgba(255,255,255,0.08)] flex flex-col">
+            {/* Physical iPhone Side Hardware Buttons (Titanium Finished) */}
+            {/* Left Side: Action Button */}
             <div
-              className="absolute inset-x-0 bottom-0 pointer-events-none z-20"
-              style={{
-                height: "40%",
-                background:
-                  "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.25) 30%, rgba(255,255,255,0.7) 60%, rgba(255,255,255,0.95) 85%, #ffffff 100%)",
-              }}
+              className="hidden sm:block absolute -left-[3.5px] top-[16%] w-[3.5px] h-6 sm:h-7 bg-[#2e2e34] rounded-l-[3px] border-l border-y border-neutral-500/80 shadow-[0_1px_3px_rgba(0,0,0,0.4)] pointer-events-none"
+              aria-hidden="true"
             />
+            {/* Left Side: Volume Up */}
+            <div
+              className="hidden sm:block absolute -left-[3.5px] top-[24%] w-[3.5px] h-10 sm:h-12 bg-[#2e2e34] rounded-l-[3px] border-l border-y border-neutral-500/80 shadow-[0_1px_3px_rgba(0,0,0,0.4)] pointer-events-none"
+              aria-hidden="true"
+            />
+            {/* Left Side: Volume Down */}
+            <div
+              className="hidden sm:block absolute -left-[3.5px] top-[34%] w-[3.5px] h-10 sm:h-12 bg-[#2e2e34] rounded-l-[3px] border-l border-y border-neutral-500/80 shadow-[0_1px_3px_rgba(0,0,0,0.4)] pointer-events-none"
+              aria-hidden="true"
+            />
+            {/* Right Side: Power / Side Button */}
+            <div
+              className="hidden sm:block absolute -right-[3.5px] top-[26%] w-[3.5px] h-14 sm:h-16 bg-[#2e2e34] rounded-r-[3px] border-r border-y border-neutral-500/80 shadow-[0_1px_3px_rgba(0,0,0,0.4)] pointer-events-none"
+              aria-hidden="true"
+            />
+
+            {/* Subtle Antenna Band Indicators */}
+            <div className="hidden sm:block absolute -left-[1px] top-[8%] w-[2px] h-[3px] bg-neutral-600/40 pointer-events-none" />
+            <div className="hidden sm:block absolute -left-[1px] bottom-[8%] w-[2px] h-[3px] bg-neutral-600/40 pointer-events-none" />
+            <div className="hidden sm:block absolute -right-[1px] top-[8%] w-[2px] h-[3px] bg-neutral-600/40 pointer-events-none" />
+            <div className="hidden sm:block absolute -right-[1px] bottom-[8%] w-[2px] h-[3px] bg-neutral-600/40 pointer-events-none" />
+
+            {/* Inner Screen Aperture Container */}
+            <div
+              ref={phoneScreenRef}
+              className="relative w-full h-full rounded-[30px] xs:rounded-[34px] sm:rounded-[41px] md:rounded-[45px] overflow-hidden bg-white"
+            >
+              {/* Dynamic Island: Centered modern camera & sensor capsule */}
+              <div className="absolute top-2 sm:top-2.5 md:top-3 left-1/2 -translate-x-1/2 w-16 sm:w-24 md:w-28 h-4.5 sm:h-6 md:h-7 bg-black rounded-full z-30 flex items-center justify-between px-2 sm:px-3 shadow-md pointer-events-none">
+                <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-[#111116] border border-white/5" />
+                <div className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 rounded-full bg-[#0a0f1d] border border-blue-900/30 ring-1 ring-white/10" />
+              </div>
+
+              {/* Layer 1: Smooth Cross-Fading Active Workspace Image */}
+              {WORKSPACE_CATEGORIES.map((cat, idx) => {
+                const isActive = idx === activeIndex;
+                return (
+                  <div
+                    key={`phone-cat-${cat.id}`}
+                    className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                      isActive ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                    }`}
+                    aria-hidden={!isActive}
+                  >
+                    <div className="relative w-full h-full overflow-hidden">
+                      <Image
+                        src={cat.topImg}
+                        alt={cat.title}
+                        fill
+                        sizes="(max-width: 640px) 250px, (max-width: 1024px) 350px, 450px"
+                        className="object-cover object-center select-none"
+                        priority
+                      />
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* Layer 2: Soft White Bottom Gradient Fade inside phone screen */}
+              <div
+                className="absolute inset-x-0 bottom-0 pointer-events-none z-20"
+                style={{
+                  height: "42%",
+                  background:
+                    "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 25%, rgba(255,255,255,0.65) 60%, rgba(255,255,255,0.92) 85%, #ffffff 100%)",
+                }}
+              />
+            </div>
           </div>
 
-          {/* Layer 3: Complete User Phone Frame Asset (Above screen content & gradient) */}
-          <div className="absolute inset-0 pointer-events-none z-30">
-            <Image
-              src="/assets/phone-frame-extended.png"
-              alt="Studio i workspace preview frame"
-              fill
-              sizes="(max-width: 640px) 400px, 600px"
-              quality={95}
-              className="object-fill select-none pointer-events-none drop-shadow-[0_24px_50px_rgba(0,0,0,0.25)]"
-              priority
-            />
-          </div>
-
-          {/* Layer 4: CTA Button overlapping lower portion of the phone frame */}
-          <div className="absolute left-1/2 -translate-x-1/2 bottom-[-16px] sm:bottom-[-20px] z-40 pointer-events-auto whitespace-nowrap">
+          {/* CTA Button overlapping lower portion of the phone frame */}
+          <div className="absolute left-1/2 -translate-x-1/2 bottom-[-18px] sm:bottom-[-22px] md:bottom-[-26px] z-40 pointer-events-auto whitespace-nowrap">
             <Link
               href="#locations"
-              className="inline-flex items-center justify-center bg-black hover:bg-neutral-900 text-white font-semibold px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl text-xs sm:text-sm shadow-2xl hover:shadow-[0_20px_35px_rgba(0,0,0,0.35)] hover:scale-105 active:scale-95 transition-all duration-300 border border-neutral-800"
+              className="inline-flex items-center justify-center bg-black hover:bg-neutral-900 text-white font-bold px-6 sm:px-10 md:px-14 py-3 sm:py-4 md:py-5 rounded-xl sm:rounded-2xl md:rounded-[22px] text-xs sm:text-sm md:text-base shadow-2xl hover:shadow-[0_24px_45px_rgba(0,0,0,0.45)] hover:scale-105 active:scale-95 transition-all duration-300 border border-neutral-800 tracking-wide"
             >
               Find Your Perfect Workspace
             </Link>
@@ -243,7 +257,7 @@ export default function WorkspaceInfiniteSlider() {
         <div className="relative z-10 w-full overflow-x-clip py-2 cursor-grab active:cursor-grabbing">
           <div
             ref={bgTrackRef}
-            className="animate-infinite-scroll flex gap-2.5 sm:gap-3 md:gap-3.5 items-center px-2"
+            className="animate-infinite-scroll flex gap-2 sm:gap-3 md:gap-3.5 items-center px-2"
             style={{
               animationDuration: "36s",
               animationPlayState: isPaused ? "paused" : "running",
@@ -255,20 +269,17 @@ export default function WorkspaceInfiniteSlider() {
               return (
                 <div
                   key={`bg-${item.id}-${index}`}
-                  className="flex flex-col items-center shrink-0"
-                  style={{
-                    width: "clamp(120px, 10.5vw, 140px)",
-                  }}
+                  className="flex flex-col items-center shrink-0 w-[95px] xs:w-[105px] sm:w-[120px] md:w-[135px] lg:w-[155px] xl:w-[165px]"
                 >
                   {/* Column Images Container (Top & Bottom stacked with square sharp corners) */}
-                  <div className="flex flex-col gap-2 sm:gap-2.5 w-full">
+                  <div className="flex flex-col gap-1.5 sm:gap-2.5 w-full">
                     {/* Top Image: Sharp square corners (border-radius: 0) */}
                     <div className="relative w-full aspect-square rounded-none overflow-hidden shadow-sm bg-neutral-100">
                       <Image
                         src={item.topImg}
                         alt={`${item.title} top view`}
                         fill
-                        sizes="(max-width: 640px) 120px, 140px"
+                        sizes="(max-width: 640px) 110px, 140px"
                         className="object-cover rounded-none"
                         priority={index < 6}
                       />
@@ -280,24 +291,26 @@ export default function WorkspaceInfiniteSlider() {
                         src={item.bottomImg}
                         alt={`${item.title} bottom view`}
                         fill
-                        sizes="(max-width: 640px) 120px, 140px"
+                        sizes="(max-width: 640px) 110px, 140px"
                         className="object-cover rounded-none"
                         priority={index < 6}
                       />
                     </div>
                   </div>
 
-                  {/* Text Description below images (outside image pair geometry, no size shifts) */}
-                  <div className="mt-3.5 sm:mt-4 text-center px-1">
+                  {/* Text Description below images */}
+                  <div className="mt-2.5 sm:mt-4 text-center px-0.5 sm:px-1">
                     <h3
-                      className={`text-[11px] sm:text-xs tracking-wider uppercase transition-colors duration-200 ${isCurrentActive ? "text-neutral-950 font-black" : "text-neutral-800 font-bold"
-                        }`}
+                      className={`text-[9px] sm:text-[11px] md:text-xs tracking-wider uppercase transition-colors duration-200 ${
+                        isCurrentActive ? "text-neutral-950 font-black" : "text-neutral-800 font-bold"
+                      }`}
                     >
                       {item.title}
                     </h3>
                     <p
-                      className={`text-[10px] sm:text-[11px] mt-0.5 transition-colors duration-200 ${isCurrentActive ? "text-neutral-800 font-semibold" : "text-neutral-500 font-medium"
-                        }`}
+                      className={`text-[8px] sm:text-[10px] md:text-[11px] mt-0.5 transition-colors duration-200 ${
+                        isCurrentActive ? "text-neutral-800 font-semibold" : "text-neutral-500 font-medium"
+                      }`}
                     >
                       {item.subtitle}
                     </p>

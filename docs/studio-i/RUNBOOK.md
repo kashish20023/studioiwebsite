@@ -10,7 +10,7 @@
 - **Runtime**: Node.js `v20.x` or `v24.x` (Verified: `v24.18.0`)
 - **Database**: PostgreSQL 16 on `localhost:5432` with user `postgres` and password `Password@246`
 - **Frontend Port**: `3000`
-- **Backend Port**: `5001`
+- **Backend Port**: `5002`
 
 ---
 
@@ -47,11 +47,11 @@ node backend/prisma/seed.cjs
 
 ## 3. Starting the Applications
 
-### 3.1 Start Studio I Backend (Port 5001)
+### 3.1 Start Studio I Backend (Port 5002)
 ```powershell
 cd backend
 npm run start:dev
-# Backend listens on http://localhost:5001/api/v1
+# Backend listens on http://localhost:5002/api/v1
 ```
 
 ### 3.2 Start Studio I Frontend (Port 3000)

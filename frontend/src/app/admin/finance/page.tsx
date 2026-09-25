@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { apiRequest } from '@/lib/api';
-import { 
-  CreditCard, TrendingUp, ShieldCheck, DollarSign, 
+import {
+  CreditCard, TrendingUp, ShieldCheck, DollarSign,
   ArrowRight, AlertCircle, CheckCircle2, RefreshCw,
   Lock, Eye, Layers, Sparkles, Building
 } from 'lucide-react';
@@ -55,7 +55,7 @@ export default function AdminFinancePage() {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-black text-black tracking-tight">
             Financial Ledger & Reconciliation
           </h1>
           <p className="text-xs text-neutral-400 mt-1">
@@ -74,32 +74,32 @@ export default function AdminFinancePage() {
 
       {/* Main Direct Mode Balance Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-[#171717] p-6 rounded-3xl border border-neutral-800 shadow-xs space-y-2">
-          <span className="text-xs text-neutral-400 font-medium">Gross Cash Collected</span>
+        <div className="bg-white p-6 rounded-3xl border border-neutral-800 shadow-xs space-y-2">
+          <span className="text-xs text-neutral-500 font-medium">Gross Cash Collected</span>
           <div className="text-2xl font-black text-white tracking-tight">
             ₹{gross.toLocaleString('en-IN')}
           </div>
           <p className="text-[10px] text-emerald-400 font-semibold">100% Captured via Mock Gateway</p>
         </div>
 
-        <div className="bg-[#171717] p-6 rounded-3xl border border-neutral-800 shadow-xs space-y-2">
-          <span className="text-xs text-neutral-400 font-medium">GST Output Tax (18%)</span>
+        <div className="bg-white p-6 rounded-3xl border border-neutral-800 shadow-xs space-y-2">
+          <span className="text-xs text-neutral-500 font-medium">GST Output Tax (18%)</span>
           <div className="text-2xl font-black text-amber-400 tracking-tight">
             ₹{tax.toLocaleString('en-IN')}
           </div>
           <p className="text-[10px] text-neutral-500">Government Tax Reserve</p>
         </div>
 
-        <div className="bg-[#171717] p-6 rounded-3xl border border-neutral-800 shadow-xs space-y-2">
-          <span className="text-xs text-neutral-400 font-medium">Refunds Disbursed</span>
+        <div className="bg-white p-6 rounded-3xl border border-neutral-800 shadow-xs space-y-2">
+          <span className="text-xs text-neutral-500 font-medium">Refunds Disbursed</span>
           <div className="text-2xl font-black text-red-400 tracking-tight">
             ₹{refunds.toLocaleString('en-IN')}
           </div>
           <p className="text-[10px] text-neutral-500">Policy-based cancellations</p>
         </div>
 
-        <div className="bg-[#171717] p-6 rounded-3xl border border-neutral-800 shadow-xs space-y-2">
-          <span className="text-xs text-neutral-400 font-medium">Net Realized Revenue</span>
+        <div className="bg-white p-6 rounded-3xl border border-neutral-800 shadow-xs space-y-2">
+          <span className="text-xs text-neutral-500 font-medium">Net Realized Revenue</span>
           <div className="text-2xl font-black text-[#FF007A] tracking-tight">
             ₹{reconciled.toLocaleString('en-IN')}
           </div>
@@ -108,7 +108,7 @@ export default function AdminFinancePage() {
       </div>
 
       {/* Itemized Direct Mode Audit Breakdown */}
-      <div className="bg-[#171717] rounded-3xl border border-neutral-800 p-6 sm:p-8 space-y-6 shadow-md">
+      <div className="bg-white rounded-3xl border border-neutral-800 p-6 sm:p-8 space-y-6 shadow-md">
         <div className="flex items-center justify-between border-b border-neutral-800 pb-4">
           <div>
             <h3 className="text-base font-bold text-white flex items-center gap-2">
@@ -158,7 +158,7 @@ export default function AdminFinancePage() {
       </div>
 
       {/* Conditionally Enabled Beneficiary Settlements Module */}
-      <div className="bg-[#171717] rounded-3xl border border-neutral-800 p-6 sm:p-8 space-y-6 shadow-md">
+      <div className="bg-white rounded-3xl border border-neutral-800 p-6 sm:p-8 space-y-6 shadow-md">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-neutral-800 pb-4">
           <div>
             <div className="flex items-center gap-2 mb-1">
@@ -177,11 +177,10 @@ export default function AdminFinancePage() {
 
           <button
             onClick={() => setEnableBeneficiarySim(!enableBeneficiarySim)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${
-              enableBeneficiarySim
-                ? 'bg-[#FF007A] text-white shadow-xs'
-                : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300'
-            }`}
+            className={`px-4 py-2 rounded-xl text-xs font-bold transition cursor-pointer ${enableBeneficiarySim
+              ? 'bg-[#FF007A] text-white shadow-xs'
+              : 'bg-neutral-800 hover:bg-neutral-700 text-neutral-300'
+              }`}
           >
             {enableBeneficiarySim ? 'Disable Beneficiary QA Mode' : 'Enable Simulated QA Mode'}
           </button>
@@ -238,11 +237,10 @@ export default function AdminFinancePage() {
               <button
                 onClick={() => setTransferAuthorized(true)}
                 disabled={transferAuthorized}
-                className={`px-4 py-2 text-xs font-bold rounded-xl transition ${
-                  transferAuthorized
-                    ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-800 cursor-not-allowed'
-                    : 'bg-[#FF007A] hover:bg-[#E0006C] text-white cursor-pointer shadow-md'
-                }`}
+                className={`px-4 py-2 text-xs font-bold rounded-xl transition ${transferAuthorized
+                  ? 'bg-emerald-950/80 text-emerald-400 border border-emerald-800 cursor-not-allowed'
+                  : 'bg-[#FF007A] hover:bg-[#E0006C] text-white cursor-pointer shadow-md'
+                  }`}
               >
                 {transferAuthorized ? '✓ Transfer Reconciled' : 'Authorize & Execute Simulated Payout'}
               </button>

@@ -1,6 +1,6 @@
 # Studio I Admin — API Performance & Latency Benchmark Report
 **Execution Date**: September 22, 2026
-**Target Architecture**: Next.js 16 (Port 3002) + NestJS REST Core (Port 5001) + PostgreSQL
+**Target Architecture**: Next.js 16 (Port 3002) + NestJS REST Core (Port 5002) + PostgreSQL
 **Sample Count**: 50 iterations per endpoint after warm-up cache initialization
 
 ## Executive Performance Summary

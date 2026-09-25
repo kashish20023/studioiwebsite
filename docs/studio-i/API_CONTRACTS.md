@@ -1,7 +1,7 @@
 # Studio I — REST API Contracts & Endpoint Specification (`API_CONTRACTS.md`)
 
 > **Protocol**: REST over HTTPS  
-> **Base URL**: `http://localhost:5001/api/v1` (Local Dev)  
+> **Base URL**: `http://localhost:5002/api/v1` (Local Dev)  
 > **Authentication**: Bearer JWT token (`Authorization: Bearer <token>`)  
 > **Standard Error Schema**: `{ statusCode: number, message: string, error: string }`
 

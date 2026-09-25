@@ -43,6 +43,19 @@ export default function MyBookingsPage() {
   };
 
   useEffect(() => {
+    const user = getStoredUser();
+    if (user?.role === 'HOST') {
+      window.location.href = '/host';
+      return;
+    }
+    if (user?.role === 'COHOST') {
+      window.location.href = '/co-host';
+      return;
+    }
+    if (user?.role === 'ADMIN') {
+      window.location.href = '/admin';
+      return;
+    }
     fetchBookings();
   }, []);
 

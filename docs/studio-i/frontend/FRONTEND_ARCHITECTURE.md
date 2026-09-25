@@ -62,7 +62,7 @@ The root `package.json` forwards developer lifecycle scripts to the canonical `f
 | `npm run build` | Runs `npm --prefix frontend run build` (Turbopack production build) |
 | `npm run start` | Runs `npm --prefix frontend run start` (Production SSR server) |
 | `npm run lint` | Runs `npm --prefix frontend run lint` (ESLint verification) |
-| `npm run backend:dev` | Runs `npm --prefix backend run start:dev` (NestJS API on `http://localhost:5001/api/v1`) |
+| `npm run backend:dev` | Runs `npm --prefix backend run start:dev` (NestJS API on `http://localhost:5002/api/v1`) |
 
 ---
 

@@ -127,6 +127,24 @@ export class HostsService {
       },
     });
 
+    const cohostsCount = await this.prisma.cohostPermission.count({
+      where: { workspaceId: { in: workspaceIds } },
+    });
+
+    const pendingInvitesCount = await this.prisma.cohostInvitation.count({
+      where: { hostId, status: 'PENDING' },
+    });
+
+    const recentCoHosts = await this.prisma.cohostPermission.findMany({
+      where: { workspaceId: { in: workspaceIds } },
+      include: {
+        user: { select: { id: true, name: true, email: true, phone: true, avatarUrl: true } },
+        workspace: { select: { id: true, name: true, city: true } },
+      },
+      take: 5,
+      orderBy: { createdAt: 'desc' },
+    });
+
     return {
       workspacesCount: workspaces.length,
       totalUnits,
@@ -135,6 +153,9 @@ export class HostsService {
       totalEarningsRupees: Number(totalEarningsPaise) / 100,
       upcomingBookingsCount,
       activeBookingsCount,
+      cohostsCount,
+      pendingInvitesCount,
+      recentCoHosts,
       recentBookings: confirmedBookings.map((b) => ({
         ...b,
         totalAmountPaise: b.totalAmountPaise.toString(),

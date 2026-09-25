@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const API_BASE = 'http://localhost:5001/api/v1';
+const API_BASE = 'http://localhost:5002/api/v1';
 
 function calculatePercentiles(latencies) {
   latencies.sort((a, b) => a - b);
@@ -29,7 +29,7 @@ async function measureEndpoint(name, method, url, headers, body, samples = 100) 
         headers: { 'Content-Type': 'application/json', ...headers },
         body: body ? JSON.stringify(body) : undefined,
       });
-    } catch {}
+    } catch { }
   }
 
   for (let i = 0; i < samples; i++) {

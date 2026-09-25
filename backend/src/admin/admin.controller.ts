@@ -83,6 +83,11 @@ export class AdminController {
     return this.adminService.getAllPayoutRequests();
   }
 
+  @Get('co-hosts')
+  async getAllCoHosts() {
+    return this.adminService.getAllCoHosts();
+  }
+
   @Post('payouts/:id/process')
   async processPayout(
     @Param('id') id: string,
@@ -90,5 +95,4 @@ export class AdminController {
   ) {
     return this.adminService.processPayoutRequest(id, dto.action, dto.notes);
   }
-
 }

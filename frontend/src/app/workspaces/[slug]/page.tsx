@@ -7,8 +7,8 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { apiRequest, getStoredUser } from '@/lib/api';
-import { 
-  MapPin, Star, Wifi, Coffee, Clock, ShieldCheck, 
+import {
+  MapPin, Star, Wifi, Coffee, Clock, ShieldCheck,
   Calendar, CheckCircle2, AlertCircle, ArrowRight,
   Layers, Users, Info, Sparkles, ChevronRight
 } from 'lucide-react';
@@ -247,7 +247,7 @@ export default function WorkspaceDetailPage({
       <Navbar />
 
       {/* Breadcrumb Header */}
-      <div className="bg-white border-b border-gray-200">
+      <div className="bg-white pt-10 border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center gap-2 text-xs font-medium text-gray-500">
           <Link href="/" className="hover:text-black">Home</Link>
           <ChevronRight className="w-3.5 h-3.5" />
@@ -334,11 +334,10 @@ export default function WorkspaceDetailPage({
                     <button
                       key={fl.id}
                       onClick={() => setSelectedFloorId(fl.id)}
-                      className={`px-3 py-1.5 rounded-full transition ${
-                        selectedFloorId === fl.id
-                          ? 'bg-black text-white shadow-xs'
-                          : 'text-gray-600 hover:text-black'
-                      }`}
+                      className={`px-3 py-1.5 rounded-full transition ${selectedFloorId === fl.id
+                        ? 'bg-black text-white shadow-xs'
+                        : 'text-gray-600 hover:text-black'
+                        }`}
                     >
                       {fl.name}
                     </button>
@@ -543,13 +542,12 @@ export default function WorkspaceDetailPage({
                           setSelectedUnit(u);
                           setHoldError(null);
                         }}
-                        className={`p-2 rounded-xl text-left border text-xs transition ${
-                          isSel
-                            ? 'bg-[#FF007A] text-white border-[#FF007A] font-bold shadow-xs'
-                            : isAvail
+                        className={`p-2 rounded-xl text-left border text-xs transition ${isSel
+                          ? 'bg-[#FF007A] text-white border-[#FF007A] font-bold shadow-xs'
+                          : isAvail
                             ? 'bg-white hover:border-gray-400 border-gray-200 text-gray-800'
                             : 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed'
-                        }`}
+                          }`}
                       >
                         <div className="font-bold truncate">{u.unitCode}</div>
                         <div className="text-[10px] opacity-80">{u.status}</div>
@@ -593,11 +591,10 @@ export default function WorkspaceDetailPage({
                     <div
                       key={plan.id}
                       onClick={() => setSelectedPlanId(plan.id)}
-                      className={`p-4 rounded-2xl border-2 cursor-pointer transition flex items-start justify-between ${
-                        isSelected
-                          ? 'border-[#FF007A] bg-pink-50/20 shadow-xs'
-                          : 'border-gray-200 hover:border-gray-300 bg-white'
-                      }`}
+                      className={`p-4 rounded-2xl border-2 cursor-pointer transition flex items-start justify-between ${isSelected
+                        ? 'border-[#FF007A] bg-pink-50/20 shadow-xs'
+                        : 'border-gray-200 hover:border-gray-300 bg-white'
+                        }`}
                     >
                       <div>
                         <div className="flex items-center gap-2">
@@ -656,11 +653,10 @@ export default function WorkspaceDetailPage({
               <button
                 onClick={handleHoldAndCheckout}
                 disabled={holding || !selectedUnit}
-                className={`w-full py-4 rounded-2xl font-bold text-sm shadow-md transition flex items-center justify-center gap-2 ${
-                  selectedUnit && !holding
-                    ? 'bg-[#FF007A] hover:bg-[#E0006C] text-white cursor-pointer hover:shadow-lg'
-                    : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                }`}
+                className={`w-full py-4 rounded-2xl font-bold text-sm shadow-md transition flex items-center justify-center gap-2 ${selectedUnit && !holding
+                  ? 'bg-[#FF007A] hover:bg-[#E0006C] text-white cursor-pointer hover:shadow-lg'
+                  : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  }`}
               >
                 {holding ? (
                   <>

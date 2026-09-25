@@ -4,7 +4,7 @@
 **Date**: September 22, 2026  
 **Active Services**:
 - Frontend: `http://localhost:3000` (Next.js 16)
-- Backend: `http://localhost:5001/api/v1` (NestJS 11, task `task-445`)
+- Backend: `http://localhost:5002/api/v1` (NestJS 11, task `task-445`)
 - Database: PostgreSQL 16 on `localhost:5432` (`studioi_dev`)
 
 ---
@@ -26,7 +26,7 @@
 
 ## Retained Demo Resources & Ownership
 
-- **Backend Process**: Node process running `backend/dist/main.js` on port `5001`.
+- **Backend Process**: Node process running `backend/dist/main.js` on port `5002`.
 - **Database**: PostgreSQL 16 database `studioi_dev` owned exclusively by Studio I tasks.
 - **FairBnB Status**: Completely untouched and unmodified.
 - **Git Status**: Clean working directory diff preserved; no branches switched, no commits or pushes performed.

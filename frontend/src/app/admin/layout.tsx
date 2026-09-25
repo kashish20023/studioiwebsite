@@ -14,6 +14,7 @@ export default function AdminLayout({
 }) {
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     setCurrentUser(getStoredUser());
@@ -22,7 +23,7 @@ export default function AdminLayout({
 
   const handleAdminSignIn = async () => {
     try {
-      const res = await fetch('http://localhost:5001/api/v1/auth/login', {
+      const res = await fetch('http://localhost:5002/api/v1/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: 'admin@studioi.com', password: 'StudioI@Admin2026' }),
@@ -94,10 +95,10 @@ export default function AdminLayout({
 
   return (
     <div className="h-screen flex bg-[#F8F9FA] overflow-hidden text-neutral-900 font-sans">
-      <AdminSidebar />
+      <AdminSidebar mobileOpen={mobileOpen} onCloseMobile={() => setMobileOpen(false)} />
       <div className="flex-1 flex flex-col min-w-0">
-        <AdminHeader />
-        <main className="flex-1 overflow-y-auto p-6 sm:p-8 bg-[#F8F9FA]">
+        <AdminHeader mobileOpen={mobileOpen} onToggleMobile={() => setMobileOpen(!mobileOpen)} />
+        <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 bg-[#F8F9FA]">
           {children}
         </main>
       </div>

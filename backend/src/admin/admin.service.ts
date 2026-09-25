@@ -25,7 +25,7 @@ export class AdminService {
       this.prisma.unit.count({ where: { status: 'ACTIVE' } }),
       this.prisma.booking.findMany({
         where: { status: { in: [BookingStatus.CONFIRMED, BookingStatus.ACTIVE] } },
-        select: { totalAmountPaise: true, taxAmountPaise: true },
+        select: { totalAmountPaise: true, taxPaise: true },
       }),
       this.prisma.user.count({ where: { role: Role.USER } }),
       this.prisma.maintenanceIssue.count({ where: { status: { in: ['OPEN', 'IN_PROGRESS'] } } }),
@@ -35,7 +35,7 @@ export class AdminService {
     let totalNetPaise = 0n;
     for (const b of confirmedBookings) {
       totalGrossPaise += b.totalAmountPaise;
-      totalNetPaise += (b.totalAmountPaise - b.taxAmountPaise);
+      totalNetPaise += (b.totalAmountPaise - b.taxPaise);
     }
 
     const currentOccupancyPercent =
@@ -78,11 +78,7 @@ export class AdminService {
           user: { select: { id: true, name: true, email: true, phone: true } },
           workspace: { select: { id: true, name: true, city: true } },
           plan: { select: { title: true, planType: true } },
-          bookingItems: {
-            include: {
-              unit: { select: { id: true, unitCode: true, name: true, unitType: true } },
-            },
-          },
+          unit: { select: { id: true, unitCode: true, name: true, unitType: true } },
           digitalPass: true,
         },
         orderBy: { createdAt: 'desc' },
@@ -93,12 +89,12 @@ export class AdminService {
     return {
       bookings: bookings.map((b) => ({
         ...b,
-        baseRatePaise: b.baseAmountPaise.toString(),
-        baseAmountPaise: b.baseAmountPaise.toString(),
+        baseRatePaise: b.baseRatePaise.toString(),
+        baseAmountPaise: b.baseRatePaise.toString(),
         totalAmountPaise: b.totalAmountPaise.toString(),
-        taxPaise: b.taxAmountPaise.toString(),
-        taxAmountPaise: b.taxAmountPaise.toString(),
-        unit: b.bookingItems?.[0]?.unit || null,
+        taxPaise: b.taxPaise.toString(),
+        taxAmountPaise: b.taxPaise.toString(),
+        unit: b.unit || null,
       })),
       total,
       page,
@@ -133,7 +129,14 @@ export class AdminService {
           isBlocked: true,
           blockReason: true,
           createdAt: true,
-          _count: { select: { bookings: true, reviews: true } },
+          cohostPermissions: {
+            include: {
+              workspace: {
+                select: { id: true, name: true, city: true },
+              },
+            },
+          },
+          _count: { select: { bookings: true, reviews: true, cohostPermissions: true } },
         },
         orderBy: { createdAt: 'desc' },
       }),
@@ -172,13 +175,13 @@ export class AdminService {
       where: { status: { in: [BookingStatus.CONFIRMED, BookingStatus.ACTIVE] } },
       select: {
         totalAmountPaise: true,
-        taxAmountPaise: true,
-        discountAmountPaise: true,
+        taxPaise: true,
+        discountPaise: true,
         securityDepositPaise: true,
       },
     });
-    const refunds = await this.prisma.refund.findMany({
-      where: { refundStatus: 'COMPLETED' },
+    const refunds = await this.prisma.refundRecord.findMany({
+      where: { status: 'COMPLETED' },
       select: { amountPaise: true },
     });
 
@@ -190,10 +193,10 @@ export class AdminService {
 
     for (const b of bookings) {
       grossPaise += b.totalAmountPaise;
-      taxPaise += b.taxAmountPaise;
-      discountPaise += b.discountAmountPaise;
+      taxPaise += b.taxPaise;
+      discountPaise += b.discountPaise;
       depositPaise += b.securityDepositPaise;
-      netRevenuePaise += (b.totalAmountPaise - b.taxAmountPaise - b.securityDepositPaise);
+      netRevenuePaise += (b.totalAmountPaise - b.taxPaise - b.securityDepositPaise);
     }
 
     let totalRefundsPaise = 0n;
@@ -244,47 +247,31 @@ export class AdminService {
 
     return this.prisma.$transaction(async (tx) => {
       // 1. Get next version number
-      const latest = await tx.floorPlanVersion.findFirst({
+      const latest = await tx.floorLayoutVersion.findFirst({
         where: { floorId: dto.floorId },
         orderBy: { versionNumber: 'desc' },
       });
       const nextVersion = (latest?.versionNumber || 0) + 1;
 
       // 2. Unpublish prior versions
-      await tx.floorPlanVersion.updateMany({
+      await tx.floorLayoutVersion.updateMany({
         where: { floorId: dto.floorId },
-        data: { isPublished: false },
+        data: { isLive: false },
       });
 
       // 3. Create published version
-      const version = await tx.floorPlanVersion.create({
+      const version = await tx.floorLayoutVersion.create({
         data: {
           floorId: dto.floorId,
           versionNumber: nextVersion,
-          isPublished: true,
+          isLive: true,
           canvasWidth: dto.canvasWidth || 1200,
           canvasHeight: dto.canvasHeight || 800,
+          layoutJson: dto.objects || [],
         },
       });
 
-      // 4. Save objects if provided
-      if (dto.objects && dto.objects.length > 0) {
-        for (const obj of dto.objects) {
-          await tx.floorPlanObject.create({
-            data: {
-              versionId: version.id,
-              objectType: obj.objectType,
-              label: obj.label,
-              x: obj.x,
-              y: obj.y,
-              width: obj.width,
-              height: obj.height,
-            },
-          });
-        }
-      }
-
-      // 5. Upsert units
+      // 4. Upsert units
       for (const u of dto.units) {
         await tx.unit.upsert({
           where: { floorId_unitCode: { floorId: dto.floorId, unitCode: u.unitCode } },
@@ -390,7 +377,7 @@ export class AdminService {
         const updated = await this.prisma.settlementAllocation.update({
           where: { id: payoutId },
           data: {
-            status: action === 'APPROVE' ? 'APPROVED' : 'FAILED',
+            status: action === 'APPROVE' ? 'APPROVED' : 'CANCELLED',
           },
         });
         return {
@@ -408,6 +395,58 @@ export class AdminService {
       payoutId,
       status: action === 'APPROVE' ? 'APPROVED' : 'REJECTED',
       notes: notes || 'Admin action recorded',
+    };
+  }
+
+  async getAllCoHosts() {
+    const cohosts = await this.prisma.cohostPermission.findMany({
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+            avatarUrl: true,
+            role: true,
+            isBlocked: true,
+          },
+        },
+        workspace: {
+          select: {
+            id: true,
+            name: true,
+            city: true,
+            address: true,
+            host: {
+              select: { id: true, name: true, email: true, phone: true },
+            },
+          },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    const pendingInvitations = await this.prisma.cohostInvitation.findMany({
+      where: { status: 'PENDING' },
+      include: {
+        workspace: {
+          select: {
+            id: true,
+            name: true,
+            city: true,
+            host: { select: { id: true, name: true, email: true } },
+          },
+        },
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+
+    return {
+      cohosts,
+      pendingInvitations,
+      totalActiveCoHosts: cohosts.length,
+      totalPendingInvites: pendingInvitations.length,
     };
   }
 }

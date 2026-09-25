@@ -1,4 +1,4 @@
-const API = 'http://localhost:5001/api/v1';
+const API = 'http://localhost:5002/api/v1';
 
 async function run() {
   console.log('=== TESTING COMPLETE STUDIO I BACKEND FLOW ===\n');
@@ -68,7 +68,7 @@ async function run() {
     }),
   });
   const quoteData = await quoteRes.json();
-  console.log(`✔ Quote: Base ₹${quoteData.pricing.baseRatePaise/100}, Discount ₹${quoteData.pricing.discountPaise/100}, Tax ₹${quoteData.pricing.taxPaise/100}, Total ₹${quoteData.pricing.totalPayablePaise/100}`);
+  console.log(`✔ Quote: Base ₹${quoteData.pricing.baseRatePaise / 100}, Discount ₹${quoteData.pricing.discountPaise / 100}, Tax ₹${quoteData.pricing.taxPaise / 100}, Total ₹${quoteData.pricing.totalPayablePaise / 100}`);
 
   // 6. Create Booking
   console.log('\n6. Creating booking from hold...');

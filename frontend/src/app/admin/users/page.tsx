@@ -12,6 +12,7 @@ export default function AdminUsersPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [selectedRole, setSelectedRole] = useState<string>('ALL');
   const [actionLoading, setActionLoading] = useState(false);
 
   const fetchUsers = async () => {
@@ -49,6 +50,12 @@ export default function AdminUsersPage() {
   };
 
   const filteredUsers = users.filter((u) => {
+    const isCoHost = (u.cohostPermissions && u.cohostPermissions.length > 0) || u.role === 'COHOST';
+    if (selectedRole === 'COHOST' && !isCoHost) return false;
+    if (selectedRole === 'HOST' && u.role !== 'HOST') return false;
+    if (selectedRole === 'ADMIN' && u.role !== 'ADMIN') return false;
+    if (selectedRole === 'USER' && (u.role !== 'USER' || isCoHost)) return false;
+
     if (!searchQuery.trim()) return true;
     const q = searchQuery.toLowerCase();
     return (
@@ -79,8 +86,8 @@ export default function AdminUsersPage() {
         </button>
       </div>
 
-      {/* Search bar */}
-      <div className="bg-[#171717] p-4 rounded-2xl border border-neutral-800">
+      {/* Search and Role Filter Bar */}
+      <div className="bg-[#171717] p-4 rounded-2xl border border-neutral-800 space-y-3">
         <div className="relative">
           <Search className="w-4 h-4 text-neutral-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -90,6 +97,30 @@ export default function AdminUsersPage() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2 bg-neutral-900 border border-neutral-800 rounded-xl text-xs text-white placeholder-neutral-500 focus:outline-none focus:ring-2 focus:ring-[#FF007A]"
           />
+        </div>
+
+        {/* Role Filter Tabs */}
+        <div className="flex flex-wrap items-center gap-2 pt-1 border-t border-neutral-800/80">
+          <span className="text-[11px] font-bold uppercase text-neutral-500 mr-1">Filter Role:</span>
+          {[
+            { id: 'ALL', label: 'All Users' },
+            { id: 'COHOST', label: 'Co-Hosts' },
+            { id: 'HOST', label: 'Primary Hosts' },
+            { id: 'USER', label: 'Regular Members' },
+            { id: 'ADMIN', label: 'Admins' },
+          ].map((r) => (
+            <button
+              key={r.id}
+              onClick={() => setSelectedRole(r.id)}
+              className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+                selectedRole === r.id
+                  ? 'bg-purple-600 text-white shadow-xs'
+                  : 'bg-neutral-900 text-neutral-400 hover:text-white hover:bg-neutral-800'
+              }`}
+            >
+              {r.label}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -127,6 +158,8 @@ export default function AdminUsersPage() {
               {!loading &&
                 filteredUsers.map((u) => {
                   const isAdmin = u.role === 'ADMIN';
+                  const isHost = u.role === 'HOST';
+                  const isCoHost = (u.cohostPermissions && u.cohostPermissions.length > 0) || u.role === 'COHOST';
                   const isBlocked = u.isBlocked;
 
                   return (
@@ -148,15 +181,31 @@ export default function AdminUsersPage() {
                       </td>
 
                       <td className="py-4 px-5">
-                        <span
-                          className={`px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
-                            isAdmin
-                              ? 'bg-purple-950/80 text-purple-400 border border-purple-800'
-                              : 'bg-neutral-800 text-neutral-300'
-                          }`}
-                        >
-                          {u.role}
-                        </span>
+                        {isCoHost ? (
+                          <div className="flex flex-col gap-0.5 items-start">
+                            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-purple-950/90 text-purple-300 border border-purple-700 flex items-center gap-1">
+                              <Users className="w-3 h-3 text-purple-400" />
+                              CO-HOST
+                            </span>
+                            {u.cohostPermissions && u.cohostPermissions.length > 0 && (
+                              <span className="text-[9px] text-purple-400 font-semibold pl-1">
+                                {u.cohostPermissions.length} {u.cohostPermissions.length === 1 ? 'Workspace' : 'Workspaces'}
+                              </span>
+                            )}
+                          </div>
+                        ) : isHost ? (
+                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-blue-950/80 text-blue-300 border border-blue-700">
+                            HOST
+                          </span>
+                        ) : isAdmin ? (
+                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pink-950/80 text-pink-300 border border-pink-700">
+                            ADMIN
+                          </span>
+                        ) : (
+                          <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-neutral-800 text-neutral-300">
+                            MEMBER
+                          </span>
+                        )}
                       </td>
 
                       <td className="py-4 px-5">

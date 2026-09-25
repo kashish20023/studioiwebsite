@@ -25,7 +25,7 @@ Studio I has been extended from a static marketing website into a complete, dire
    - Bookings Desk (`/admin/bookings`) with manual check-in/out and policy refund processing.
    - User Directory (`/admin/users`) with account blocking/unblocking.
    - Finance & Settlement Reconciliation (`/admin/finance`) with direct merchant audit and disabled-by-default beneficiary simulation.
-3. **Backend API** (`http://localhost:5001/api/v1`):
+3. **Backend API** (`http://localhost:5002/api/v1`):
    - High-throughput NestJS 11 modular backend with Prisma 6 ORM.
    - All 8 representative endpoints bench-tested with 100 samples each: **p50: 15-16ms**, **p95: 17-23ms**, **0.0% errors**.
    - Concurrency invariant verified: 20 competing holds for identical intervals resulted in **exactly 1 hold (HTTP 201)** and **19 conflicts (HTTP 409)**.
@@ -42,7 +42,7 @@ Studio I has been extended from a static marketing website into a complete, dire
 | **Horizon Tower Campus** | `http://localhost:3000/workspaces/horizon-jaipur` | Executive Suites & Floor Plan |
 | **Member Bookings** | `http://localhost:3000/my-bookings` | Member Reservation Management |
 | **Admin Operations Hub** | `http://localhost:3000/admin` | Dashboard, Bookings, Finance |
-| **Backend API Health** | `http://localhost:5001/api/v1/health/liveness` | Backend Liveness Probe |
+| **Backend API Health** | `http://localhost:5002/api/v1/health/liveness` | Backend Liveness Probe |
 
 ### Local Test Accounts
 - **Administrator**: `admin@studioi.com` / `StudioI@Admin2026`

@@ -2,7 +2,7 @@
 
 **Run ID**: `2026-09-22-final-run`  
 **Execution Date**: September 22, 2026  
-**Environment**: Local Isolated Windows 11 (`localhost:3000` Next.js 16 + `localhost:5001/api/v1` NestJS 11 + PostgreSQL 16 `studioi_dev`)  
+**Environment**: Local Isolated Windows 11 (`localhost:3000` Next.js 16 + `localhost:5002/api/v1` NestJS 11 + PostgreSQL 16 `studioi_dev`)  
 **Overall Status**: **PASS**
 
 ---

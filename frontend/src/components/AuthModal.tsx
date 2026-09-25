@@ -44,6 +44,13 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
         setStoredSession(res.token, res.user);
         onSuccess(res.user);
         onClose();
+        if (res.user?.role === "HOST") {
+          window.location.href = "/host/today";
+        } else if (res.user?.role === "COHOST") {
+          window.location.href = "/co-host";
+        } else if (res.user?.role === "ADMIN") {
+          window.location.href = "/admin";
+        }
       }
     } catch (err: any) {
       setError(err.message || "Authentication failed. Please verify credentials.");
@@ -99,6 +106,22 @@ export default function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps
             >
               <User className="w-3.5 h-3.5 text-[#FF007A]" />
               Demo Member
+            </button>
+            <button
+              type="button"
+              onClick={() => fillDemo("host@studioi.com", "StudioI@Host2026")}
+              className="px-3 py-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-xs font-semibold text-white flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              Demo Host
+            </button>
+            <button
+              type="button"
+              onClick={() => fillDemo("cohost@studioi.com", "StudioI@Cohost2026")}
+              className="px-3 py-2 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-xs font-semibold text-white flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+            >
+              <ShieldCheck className="w-3.5 h-3.5 text-purple-400" />
+              Demo Co-Host
             </button>
             <button
               type="button"

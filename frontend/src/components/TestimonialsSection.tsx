@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { X } from "lucide-react";
+import { X, Play, Star } from "lucide-react";
 import { InstagramIcon, LinkedinIcon, FacebookIcon, XTwitterIcon } from "./SocialIcons";
 
 export default function TestimonialsSection() {
@@ -12,39 +12,39 @@ export default function TestimonialsSection() {
   const testimonials = [
     {
       id: 1,
-      title: "Follow us on Social Media",
+      title: "Game-changer for our tech team",
       quote:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914",
+        "Studio i provided our engineering team with gigabit fiber, 24/7 power backup, and top-tier meeting rooms. Our sprint velocity doubled within weeks of moving in.",
       author: "Rahul Singh",
-      role: "CEO of TPL",
+      role: "CEO, TPL Solutions",
       avatar: "/assets/avatar-rahul.jpg",
     },
     {
       id: 2,
-      title: "Follow us on Social Media",
+      title: "Best creative workspace in Jaipur",
       quote:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914",
-      author: "Rahul Singh",
-      role: "CEO of TPL",
-      avatar: "/assets/avatar-rahul.jpg",
+        "The ergonomic seating, specialty artisan coffee, and vibrant community networking sessions make working from Studio i an absolute daily pleasure.",
+      author: "Priya Sharma",
+      role: "Creative Director, StudioFlux",
+      avatar: "/assets/avatar-priya.jpg",
     },
     {
       id: 3,
-      title: "Follow us on Social Media",
+      title: "Seamless booking & flexible desks",
       quote:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914",
-      author: "Rahul Singh",
-      role: "CEO of TPL",
-      avatar: "/assets/avatar-rahul.jpg",
+        "Being able to book private suites and hot desks on demand with instant digital passes is unmatched for traveling founders and remote teams.",
+      author: "Amit Verma",
+      role: "Head of Engineering, HyperScale",
+      avatar: "/assets/avatar-amit.jpg",
     },
     {
       id: 4,
-      title: "Follow us on Social Media",
+      title: "World-class client impressions",
       quote:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since 1966, when designers at Letraset and James Mosley, the librarian at St Bride Printing Library in London, took a 1914",
-      author: "Rahul Singh",
-      role: "CEO of TPL",
-      avatar: "/assets/avatar-rahul.jpg",
+        "Every client meeting in the 4K video boardroom leaves a stellar impression. Horizon Tower and Lehariya are Jaipur's finest business addresses.",
+      author: "Neha Gupta",
+      role: "Managing Partner, Apex Advisory",
+      avatar: "/assets/avatar-neha.jpg",
     },
   ];
 
@@ -52,59 +52,67 @@ export default function TestimonialsSection() {
   const rightCards = testimonials.slice(2, 4);
 
   return (
-    <section id="experience" className="py-12 sm:py-16 max-sm:py-6 px-4 sm:px-6 max-w-[1180px] mx-auto">
+    <section id="experience" className="py-10 sm:py-16 px-4 sm:px-6 max-w-[1180px] mx-auto">
       {/* Section Header */}
-      <div className="text-center mb-10 sm:mb-12">
-        <span className="text-[#FF007A] font-semibold text-sm tracking-widest uppercase block mb-1">
-          Our Testimonial
+      <div className="text-center mb-8 sm:mb-12">
+        <span className="text-[#FF007A] font-bold text-xs sm:text-sm tracking-widest uppercase block mb-1.5">
+          Our Testimonials
         </span>
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 tracking-tight leading-tight">
-          See what our <br className="hidden sm:inline" />
-          <span className="text-[#FF007A]">Users are saying</span>
+        <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-black text-neutral-900 tracking-tight leading-tight">
+          See what our <span className="text-[#FF007A]">Users are saying</span>
         </h2>
       </div>
 
       {/* 3-Column Layout: Left (2 cards) | Center Reel (1 video card) | Right (2 cards) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 items-center">
         {/* Left 2 Cards */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
+        <div className="lg:col-span-4 flex flex-col gap-4 sm:gap-6 order-2 lg:order-1">
           {leftCards.map((card) => (
             <TestimonialCard key={card.id} card={card} />
           ))}
         </div>
 
         {/* Center Video Reel Card */}
-        <div className="lg:col-span-4 flex justify-center order-first lg:order-none">
-          <div className="relative w-full max-w-[280px] sm:max-w-[300px] rounded-3xl overflow-hidden shadow-2xl transition-all duration-300 hover:shadow-[0_20px_50px_rgba(255,0,122,0.15)] group cursor-pointer">
-            {/* Native Card Image matching PDF */}
+        <div className="lg:col-span-4 flex justify-center order-1 lg:order-2">
+          <div className="relative w-full max-w-[270px] xs:max-w-[285px] sm:max-w-[310px] aspect-[9/14.5] rounded-3xl overflow-hidden shadow-2xl border border-neutral-200/90 group cursor-pointer bg-neutral-950 transition-all duration-300 hover:shadow-[0_20px_50px_rgba(255,0,122,0.2)]">
+            {/* High-res clean portrait image without baked-in margins */}
             <Image
-              src="/assets/testimonial-reel-card.png"
-              alt="Rahul Singh Studio i Video Story"
-              width={750}
-              height={1260}
-              className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-500"
+              src="/assets/extracted_images/img_31_X95.jpg"
+              alt="Rahul Singh Studio i Member Story"
+              fill
+              sizes="(max-width: 640px) 290px, 320px"
+              className="object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+              priority
             />
 
-            {/* Interactive Hotspot for Play Button */}
+            {/* Gradient Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/30 pointer-events-none" />
+
+            {/* Interactive Play Button Hotspot */}
             <button
               type="button"
               onClick={() => setIsVideoModalOpen(true)}
-              className="absolute top-[48%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full focus:outline-none focus:ring-4 focus:ring-[#FF007A]/40 transition-transform group-hover:scale-110 active:scale-95"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-18 sm:h-18 rounded-full bg-white text-black shadow-2xl flex items-center justify-center group-hover:scale-110 active:scale-95 transition-all duration-300 z-20 cursor-pointer focus:outline-none focus:ring-4 focus:ring-[#FF007A]/50"
               aria-label="Play Member Video Story"
-            />
+            >
+              <Play className="w-7 h-7 fill-black ml-1 text-black" />
+            </button>
 
-            {/* Interactive Hotspot for Follow on Social Media Button */}
-            <button
-              type="button"
-              onClick={() => setIsSocialModalOpen(true)}
-              className="absolute bottom-[6%] inset-x-8 h-12 rounded-full focus:outline-none focus:ring-4 focus:ring-white/50 transition-transform hover:scale-[1.02] active:scale-95"
-              aria-label="Follow us on Social Media"
-            />
+            {/* Bottom Card Content: Follow on Social Media Button */}
+            <div className="absolute inset-x-4 bottom-5 z-20 flex flex-col items-center">
+              <button
+                type="button"
+                onClick={() => setIsSocialModalOpen(true)}
+                className="w-full py-3.5 px-4 rounded-full bg-[#FF007A] hover:bg-[#E0006C] text-white font-bold text-xs sm:text-sm shadow-xl hover:shadow-[0_10px_25px_rgba(255,0,122,0.4)] hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer tracking-wide"
+              >
+                Follow us on Social Media
+              </button>
+            </div>
           </div>
         </div>
 
         {/* Right 2 Cards */}
-        <div className="lg:col-span-4 flex flex-col gap-6">
+        <div className="lg:col-span-4 flex flex-col gap-4 sm:gap-6 order-3">
           {rightCards.map((card) => (
             <TestimonialCard key={card.id} card={card} />
           ))}
@@ -125,9 +133,7 @@ export default function TestimonialsSection() {
             </button>
 
             <div className="w-20 h-20 bg-[#FF007A]/20 text-[#FF007A] rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
-              <svg className="w-10 h-10 fill-current translate-x-0.5" viewBox="0 0 24 24">
-                <path d="M8 5v14l11-7z" />
-              </svg>
+              <Play className="w-8 h-8 fill-current ml-1" />
             </div>
             <h3 className="text-2xl font-black tracking-tight">Studio i Member Stories</h3>
             <p className="text-sm text-neutral-400 mt-2 max-w-sm mx-auto leading-relaxed">
@@ -231,29 +237,42 @@ function TestimonialCard({
   };
 }) {
   return (
-    <div className="bg-white rounded-3xl p-6 border border-gray-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:border-gray-300 transition-all duration-300 flex flex-col justify-between">
+    <div className="bg-white rounded-3xl p-5 sm:p-6 border border-gray-200/90 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)] hover:border-gray-300 transition-all duration-300 flex flex-col justify-between">
       <div>
-        <h4 className="text-base font-bold text-neutral-900 mb-2.5">
+        {/* Rating Stars */}
+        <div className="flex items-center gap-1 mb-2.5">
+          {[...Array(5)].map((_, i) => (
+            <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+          ))}
+        </div>
+
+        <h4 className="text-sm sm:text-base font-bold text-neutral-900 mb-2 leading-snug">
           {card.title}
         </h4>
         <p className="text-xs sm:text-[13px] text-neutral-600 leading-relaxed font-normal">
-          {card.quote}
+          &ldquo;{card.quote}&rdquo;
         </p>
       </div>
 
-      {/* Author Pill */}
-      <div className="mt-5 inline-flex items-center justify-between bg-[#FF007A] text-white rounded-full pl-5 pr-1.5 py-1.5 shadow-sm max-w-xs">
-        <span className="text-xs font-semibold tracking-wide">
-          {card.author}, {card.role}
-        </span>
-        <div className="w-7 h-7 rounded-full overflow-hidden border-2 border-white/90 shrink-0 ml-3 relative">
-          <Image
-            src={card.avatar}
-            alt={card.author}
-            fill
-            className="object-cover"
-          />
+      {/* Author Footer */}
+      <div className="mt-4 pt-3.5 border-t border-gray-100 flex items-center justify-between">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="w-8 h-8 rounded-full overflow-hidden border border-neutral-200 shrink-0 relative bg-neutral-100">
+            <Image
+              src={card.avatar}
+              alt={card.author}
+              fill
+              className="object-cover scale-110"
+            />
+          </div>
+          <div className="min-w-0">
+            <div className="text-xs font-bold text-neutral-900 truncate">{card.author}</div>
+            <div className="text-[10px] text-neutral-500 font-medium truncate">{card.role}</div>
+          </div>
         </div>
+        <span className="text-[10px] font-bold text-[#FF007A] bg-[#FF007A]/10 px-2.5 py-0.5 rounded-full shrink-0 ml-2">
+          Verified
+        </span>
       </div>
     </div>
   );

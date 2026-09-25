@@ -25,7 +25,7 @@ export class CoHostController {
   async inviteCoHost(
     @Param('workspaceId') workspaceId: string,
     @CurrentUser() user: any,
-    @Body() dto: { email: string; permissions?: any },
+    @Body() dto: { email: string; name?: string; mobileNo?: string; permissions?: any },
   ) {
     return this.coHostService.inviteCoHost(user.id, workspaceId, dto);
   }

@@ -7,9 +7,9 @@ import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { apiRequest } from '@/lib/api';
-import { 
-  Search, MapPin, SlidersHorizontal, Users, 
-  Wifi, Coffee, Clock, ShieldCheck, Star, 
+import {
+  Search, MapPin, SlidersHorizontal, Users,
+  Wifi, Coffee, Clock, ShieldCheck, Star,
   Grid, Map as MapIcon, ArrowRight, CheckCircle2,
   Sparkles, Layers
 } from 'lucide-react';
@@ -135,7 +135,7 @@ function ExploreContent() {
 
       {/* Subheader Search & Filter Bar */}
       <div className="bg-white border-b border-gray-200 sticky top-[72px] z-30 shadow-xs">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4.5 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           {/* Quick Search */}
           <div className="relative flex-1 max-w-md">
             <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -156,11 +156,10 @@ function ExploreContent() {
                 <button
                   key={city}
                   onClick={() => setSelectedCity(city)}
-                  className={`px-3.5 py-1.5 rounded-full transition ${
-                    selectedCity === city
-                      ? 'bg-black text-white shadow-xs'
-                      : 'text-gray-600 hover:text-black'
-                  }`}
+                  className={`px-3.5 py-1.5 rounded-full transition ${selectedCity === city
+                    ? 'bg-black text-white shadow-xs'
+                    : 'text-gray-600 hover:text-black'
+                    }`}
                 >
                   {city}
                 </button>
@@ -173,11 +172,10 @@ function ExploreContent() {
                 <button
                   key={t.value}
                   onClick={() => setSelectedType(t.value)}
-                  className={`px-3.5 py-1.5 rounded-full transition ${
-                    selectedType === t.value
-                      ? 'bg-[#FF007A] text-white shadow-xs'
-                      : 'text-gray-600 hover:text-black'
-                  }`}
+                  className={`px-3.5 py-1.5 rounded-full transition ${selectedType === t.value
+                    ? 'bg-[#FF007A] text-white shadow-xs'
+                    : 'text-gray-600 hover:text-black'
+                    }`}
                 >
                   {t.label}
                 </button>
@@ -188,18 +186,16 @@ function ExploreContent() {
             <div className="flex items-center bg-gray-100 p-1 rounded-full text-xs font-medium ml-auto">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-1.5 rounded-full transition ${
-                  viewMode === 'grid' ? 'bg-white shadow-xs text-black' : 'text-gray-500'
-                }`}
+                className={`p-1.5 rounded-full transition ${viewMode === 'grid' ? 'bg-white shadow-xs text-black' : 'text-gray-500'
+                  }`}
                 title="Grid view"
               >
                 <Grid className="w-4 h-4" />
               </button>
               <button
                 onClick={() => setViewMode('map')}
-                className={`p-1.5 rounded-full transition ${
-                  viewMode === 'map' ? 'bg-white shadow-xs text-black' : 'text-gray-500'
-                }`}
+                className={`p-1.5 rounded-full transition ${viewMode === 'map' ? 'bg-white shadow-xs text-black' : 'text-gray-500'
+                  }`}
                 title="Interactive Map view"
               >
                 <MapIcon className="w-4 h-4" />
@@ -260,7 +256,7 @@ function ExploreContent() {
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 p-6 rounded-2xl my-8 text-center">
             <p className="font-semibold">{error}</p>
-            <p className="text-xs mt-1 text-red-500">Ensure the Studio I backend is running on http://localhost:5001</p>
+            <p className="text-xs mt-1 text-red-500">Ensure the Studio I backend is running on http://localhost:5002</p>
           </div>
         )}
 

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const API_BASE = 'http://localhost:5001/api/v1';
+const API_BASE = 'http://localhost:5002/api/v1';
 const FRONTEND_BASE = 'http://localhost:3000';
 const REPORT_DIR = path.join(__dirname, 'reports', '2026-09-22-ux-upgrade-run');
 
@@ -33,7 +33,7 @@ async function measureEndpoint(name, method, url, headers, body, samples = 100) 
         headers: { 'Content-Type': 'application/json', ...headers },
         body: body ? JSON.stringify(body) : undefined,
       });
-    } catch {}
+    } catch { }
   }
 
   for (let i = 0; i < samples; i++) {
@@ -101,7 +101,7 @@ async function main() {
         headers: { 'Content-Type': 'application/json', ...headers },
         body: body ? JSON.stringify(body) : undefined,
       });
-      const passed = expectedStatus === 200 || expectedStatus === 201 
+      const passed = expectedStatus === 200 || expectedStatus === 201
         ? (res.status === 200 || res.status === 201)
         : res.status === expectedStatus;
       apiTestResults.push({

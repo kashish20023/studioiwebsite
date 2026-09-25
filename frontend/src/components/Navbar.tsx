@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="sticky top-4 z-50 px-4 sm:px-6 w-full max-w-[1180px] mx-auto">
+      <header className="sticky top-4 z-50 px-3 sm:px-6 w-full max-w-[1180px] mx-auto">
         <nav className="bg-black text-white rounded-full px-6 sm:px-8 py-3 sm:py-3.5 flex items-center justify-between shadow-2xl backdrop-blur-md border border-neutral-800 transition-all duration-300">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-1 group shrink-0">
@@ -63,6 +63,26 @@ export default function Navbar() {
 
           {/* Right Action Items */}
           <div className="hidden md:flex items-center gap-3">
+            {currentUser?.role === "HOST" && (
+              <Link
+                href="/host"
+                className="px-3.5 py-1.5 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-[#FF007A]/40 text-[#FF007A] text-xs font-bold flex items-center gap-1.5 transition-all"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-[#FF007A]" />
+                Host Platform
+              </Link>
+            )}
+
+            {(currentUser?.role === "COHOST" || (currentUser?.cohostPermissions && currentUser.cohostPermissions.length > 0)) && (
+              <Link
+                href="/co-host"
+                className="px-3.5 py-1.5 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-purple-500/40 text-purple-300 text-xs font-bold flex items-center gap-1.5 transition-all"
+              >
+                <ShieldCheck className="w-3.5 h-3.5 text-purple-400" />
+                Co-Host Portal
+              </Link>
+            )}
+
             {currentUser?.role === "ADMIN" && (
               <Link
                 href="/admin"
@@ -76,11 +96,17 @@ export default function Navbar() {
             {currentUser ? (
               <div className="flex items-center gap-2">
                 <Link
-                  href="/my-bookings"
+                  href={
+                    currentUser.role === "HOST" ? "/host" :
+                      currentUser.role === "COHOST" ? "/co-host" :
+                        currentUser.role === "ADMIN" ? "/admin" : "/my-bookings"
+                  }
                   className="px-4 py-2 rounded-full bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-xs font-semibold text-white flex items-center gap-1.5 transition-colors"
                 >
                   <Ticket className="w-3.5 h-3.5 text-[#FF007A]" />
-                  My Bookings
+                  {currentUser.role === "HOST" ? "Host Workspace" :
+                    currentUser.role === "COHOST" ? "Co-Host Workspace" :
+                      currentUser.role === "ADMIN" ? "Admin Console" : "My Bookings"}
                 </Link>
                 <button
                   type="button"
@@ -142,23 +168,19 @@ export default function Navbar() {
               <>
                 <div className="border-t border-neutral-800 pt-2 flex flex-col gap-2">
                   <Link
-                    href="/my-bookings"
+                    href={
+                      currentUser.role === "HOST" ? "/host" :
+                        currentUser.role === "COHOST" ? "/co-host" :
+                          currentUser.role === "ADMIN" ? "/admin" : "/my-bookings"
+                    }
                     onClick={() => setMobileMenuOpen(false)}
                     className="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-neutral-900 text-sm font-semibold"
                   >
                     <Ticket className="w-4 h-4 text-[#FF007A]" />
-                    My Bookings
+                    {currentUser.role === "HOST" ? "Host Dashboard" :
+                      currentUser.role === "COHOST" ? "Co-Host Dashboard" :
+                        currentUser.role === "ADMIN" ? "Admin Portal" : "My Bookings"}
                   </Link>
-                  {currentUser.role === "ADMIN" && (
-                    <Link
-                      href="/admin"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center gap-2 py-2 px-3 rounded-lg bg-amber-500/10 text-amber-300 text-sm font-semibold"
-                    >
-                      <ShieldCheck className="w-4 h-4 text-amber-400" />
-                      Admin Portal
-                    </Link>
-                  )}
                   <button
                     type="button"
                     onClick={() => {

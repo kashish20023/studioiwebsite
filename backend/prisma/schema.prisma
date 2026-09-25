@@ -530,17 +530,22 @@ model AccessSession {
 // -----------------------------------------------------------------------------
 
 model CohostInvitation {
-  id            String    @id @default(uuid())
-  workspaceId   String
-  workspace     Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  hostId        String
-  host          User      @relation("HostInvitations", fields: [hostId], references: [id], onDelete: Cascade)
-  inviteeEmail  String
-  token         String    @unique
-  permissions   Json      // ["canManageListing", "canViewFinances", "canManageBookings", "canManageCalendar", "canManageMaintenance", "canMessageGuests"]
-  status        String    @default("PENDING") // PENDING, ACCEPTED, DECLINED, EXPIRED
-  expiresAt     DateTime
-  createdAt     DateTime  @default(now())
+  id              String    @id @default(uuid())
+  workspaceId     String
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  hostId          String
+  host            User      @relation("HostInvitations", fields: [hostId], references: [id], onDelete: Cascade)
+
+  // Invitee Contact Details (stored at time of invite, in case they don't have an account yet)
+  inviteeEmail    String
+  inviteeName     String?   // Optional display name provided by host when inviting
+  inviteeMobileNo String?   // Optional mobile number provided by host when inviting
+
+  token           String    @unique
+  permissions     Json      // { canManageListing, canViewFinances, canManageBookings, canManageCalendar, canManageMaintenance, canMessageGuests }
+  status          String    @default("PENDING") // PENDING, ACCEPTED, DECLINED, EXPIRED
+  expiresAt       DateTime
+  createdAt       DateTime  @default(now())
 
   @@index([workspaceId])
   @@index([token])
@@ -552,12 +557,20 @@ model CohostPermission {
   workspace            Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   userId               String
   user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Co-Host Contact Details (denormalized for quick access without joining User table)
+  name                 String?
+  email                String?
+  mobileNo             String?
+
+  // Granular Permission Flags
   canManageListing     Boolean   @default(true)
   canViewFinances      Boolean   @default(false)
   canManageBookings    Boolean   @default(true)
   canManageCalendar    Boolean   @default(true)
   canManageMaintenance Boolean   @default(true)
   canMessageGuests     Boolean   @default(true)
+
   createdAt            DateTime  @default(now())
   updatedAt            DateTime  @updatedAt
 

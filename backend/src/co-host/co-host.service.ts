@@ -6,6 +6,8 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import * as crypto from 'crypto';
+import * as bcrypt from 'bcrypt';
+import { Role } from '@prisma/client';
 
 @Injectable()
 export class CoHostService {
@@ -18,6 +20,8 @@ export class CoHostService {
     workspaceId: string,
     dto: {
       email: string;
+      name?: string;         // Optional: display name the host provides for the invitee
+      mobileNo?: string;     // Optional: mobile number the host provides for the invitee
       permissions?: {
         canManageListing?: boolean;
         canViewFinances?: boolean;
@@ -49,26 +53,91 @@ export class CoHostService {
       canMessageGuests: dto.permissions?.canMessageGuests ?? true,
     };
 
+    let targetUser = await this.prisma.user.findUnique({
+      where: { email: inviteeEmail },
+    });
+
+    let tempPassword: string | null = null;
+    let isNewUser = false;
+
+    // Case B: Auto-Provisioning a Brand New Co-Host (FairBnb Architecture)
+    if (!targetUser) {
+      isNewUser = true;
+      tempPassword = crypto.randomBytes(4).toString('hex');
+      const passwordHash = await bcrypt.hash(tempPassword, 10);
+
+      // Auto-create User account with role 'HOST' so they have portal privileges
+      targetUser = await this.prisma.user.create({
+        data: {
+          name: inviteeEmail.split('@')[0],
+          email: inviteeEmail,
+          passwordHash,
+          role: Role.HOST,
+        },
+      });
+    }
+
+    // Resolve contact details: DTO fields take priority → fall back to User record
+    const resolvedName    = dto.name     || targetUser?.name    || inviteeEmail.split('@')[0];
+    const resolvedMobile  = dto.mobileNo || targetUser?.phone   || null;
+    const resolvedEmail   = inviteeEmail;
+
     const invitation = await this.prisma.cohostInvitation.create({
       data: {
         workspaceId,
         hostId,
-        inviteeEmail,
+        inviteeEmail:    resolvedEmail,
+        inviteeName:     resolvedName,
+        inviteeMobileNo: resolvedMobile,
         token,
         permissions: defaultPermissions,
         expiresAt,
-        status: 'PENDING',
+        status: isNewUser ? 'ACCEPTED' : 'PENDING',
       },
     });
 
+    // If auto-provisioned, immediately activate the co-host relationship
+    if (isNewUser && targetUser) {
+      await this.prisma.cohostPermission.upsert({
+        where: {
+          workspaceId_userId: {
+            workspaceId,
+            userId: targetUser.id,
+          },
+        },
+        update: {
+          ...defaultPermissions,
+          name:     resolvedName,
+          email:    resolvedEmail,
+          mobileNo: resolvedMobile,
+        },
+        create: {
+          workspaceId,
+          userId: targetUser.id,
+          ...defaultPermissions,
+          name:     resolvedName,
+          email:    resolvedEmail,
+          mobileNo: resolvedMobile,
+        },
+      });
+    }
+
     return {
-      message: 'Co-host invitation created successfully',
+      message: isNewUser
+        ? 'Brand new co-host auto-provisioned with HOST role and active permissions'
+        : 'Co-host invitation created successfully for existing user',
+      isNewUser,
+      userRole: targetUser.role,
+      tempPassword: tempPassword || undefined,
       invitation: {
-        id: invitation.id,
-        inviteeEmail: invitation.inviteeEmail,
-        token: invitation.token,
-        permissions: invitation.permissions,
-        expiresAt: invitation.expiresAt,
+        id:              invitation.id,
+        inviteeEmail:    invitation.inviteeEmail,
+        inviteeName:     invitation.inviteeName,
+        inviteeMobileNo: invitation.inviteeMobileNo,
+        token:           invitation.token,
+        status:          invitation.status,
+        permissions:     invitation.permissions,
+        expiresAt:       invitation.expiresAt,
       },
     };
   }
@@ -177,6 +246,7 @@ export class CoHostService {
 
     const perms = (invitation.permissions as any) || {};
 
+    // Sync contact details from User record into CohostPermission for direct lookups
     const permission = await this.prisma.cohostPermission.upsert({
       where: {
         workspaceId_userId: {
@@ -185,22 +255,32 @@ export class CoHostService {
         },
       },
       update: {
-        canManageListing: perms.canManageListing ?? true,
-        canViewFinances: perms.canViewFinances ?? false,
-        canManageBookings: perms.canManageBookings ?? true,
-        canManageCalendar: perms.canManageCalendar ?? true,
+        // Contact details — always sync from the actual User record on accept
+        name:     user.name    || (invitation as any).inviteeName    || null,
+        email:    user.email   || invitation.inviteeEmail,
+        mobileNo: user.phone   || (invitation as any).inviteeMobileNo || null,
+        // Permission flags from invitation
+        canManageListing:     perms.canManageListing     ?? true,
+        canViewFinances:      perms.canViewFinances      ?? false,
+        canManageBookings:    perms.canManageBookings    ?? true,
+        canManageCalendar:    perms.canManageCalendar    ?? true,
         canManageMaintenance: perms.canManageMaintenance ?? true,
-        canMessageGuests: perms.canMessageGuests ?? true,
+        canMessageGuests:     perms.canMessageGuests     ?? true,
       },
       create: {
         workspaceId: invitation.workspaceId,
         userId,
-        canManageListing: perms.canManageListing ?? true,
-        canViewFinances: perms.canViewFinances ?? false,
-        canManageBookings: perms.canManageBookings ?? true,
-        canManageCalendar: perms.canManageCalendar ?? true,
+        // Contact details stored alongside permissions for fast queries
+        name:     user.name    || (invitation as any).inviteeName    || null,
+        email:    user.email   || invitation.inviteeEmail,
+        mobileNo: user.phone   || (invitation as any).inviteeMobileNo || null,
+        // Permission flags
+        canManageListing:     perms.canManageListing     ?? true,
+        canViewFinances:      perms.canViewFinances      ?? false,
+        canManageBookings:    perms.canManageBookings    ?? true,
+        canManageCalendar:    perms.canManageCalendar    ?? true,
         canManageMaintenance: perms.canManageMaintenance ?? true,
-        canMessageGuests: perms.canMessageGuests ?? true,
+        canMessageGuests:     perms.canMessageGuests     ?? true,
       },
     });
 
@@ -210,7 +290,7 @@ export class CoHostService {
     });
 
     return {
-      message: 'Invitation accepted successfully. You are now a co-host of ' + (invitation.workspace as any)?.name || "the workspace",
+      message: `Invitation accepted. You are now a co-host of ${(invitation.workspace as any)?.name || 'the workspace'}.`,
       permission,
     };
   }

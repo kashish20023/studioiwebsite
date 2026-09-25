@@ -38,7 +38,7 @@ export default function HeroSection() {
         </div>
 
         {/* Main Heading */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-neutral-950 leading-[1.12]">
+        <h1 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-neutral-950 leading-[1.15]">
           A Workspace for{" "}
           <span className="text-[#FF007A] italic">
             Every You
@@ -46,14 +46,14 @@ export default function HeroSection() {
         </h1>
 
         {/* Subtitle */}
-        <p className="mt-2 text-sm sm:text-base text-neutral-600 max-w-xl mx-auto font-normal leading-relaxed">
+        <p className="mt-2 text-xs sm:text-sm md:text-base text-neutral-600 max-w-xl mx-auto font-normal leading-relaxed px-2">
           Flexible desks, private cabins, meeting rooms and more — book inspiring coworking spaces
           instantly, anytime, anywhere.
         </p>
       </div>
 
       {/* Visual Showcase Strip: Continuous Infinite Slider with Central Phone Highlighting */}
-      <div className="relative mt-2 sm:mt-3 w-full">
+      <div className="relative mt-4 sm:mt-6 md:mt-8 lg:mt-10 w-full">
         <WorkspaceInfiniteSlider />
       </div>
     </section>

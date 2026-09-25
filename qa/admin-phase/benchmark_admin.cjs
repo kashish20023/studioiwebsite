@@ -2,7 +2,7 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
-const API_BASE = 'http://localhost:5001/api/v1';
+const API_BASE = 'http://localhost:5002/api/v1';
 
 async function makeRequest(urlPath, token = null) {
   return new Promise((resolve, reject) => {
@@ -115,7 +115,7 @@ async function runBenchmarks() {
   const reportPath = path.resolve('docs/admin-phase/BENCHMARK_TIMING_REPORT.md');
   const markdown = `# Studio I Admin — API Performance & Latency Benchmark Report
 **Execution Date**: September 22, 2026
-**Target Architecture**: Next.js 16 (Port 3002) + NestJS REST Core (Port 5001) + PostgreSQL
+**Target Architecture**: Next.js 16 (Port 3002) + NestJS REST Core (Port 5002) + PostgreSQL
 **Sample Count**: ${ITERATIONS} iterations per endpoint after warm-up cache initialization
 
 ## Executive Performance Summary

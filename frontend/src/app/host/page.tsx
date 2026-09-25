@@ -50,13 +50,20 @@ export default function HostDashboardPage() {
           </p>
         </div>
 
-        <div className="flex gap-3 shrink-0">
+        <div className="flex flex-wrap gap-3 shrink-0">
           <Link
             href="/host/workspaces"
             className="px-4 py-2.5 bg-[#FF007A] hover:bg-[#E0006C] text-white text-xs font-bold rounded-xl flex items-center gap-2 transition shadow-md"
           >
             <Building className="w-4 h-4" />
             Manage Workspaces
+          </Link>
+          <Link
+            href="/host/co-hosts"
+            className="px-4 py-2.5 bg-neutral-800 hover:bg-neutral-700 text-purple-300 border border-purple-800/40 text-xs font-semibold rounded-xl flex items-center gap-2 transition"
+          >
+            <Users className="w-4 h-4 text-purple-400" />
+            Co-Host Team
           </Link>
           <Link
             href="/host/earnings"
@@ -69,14 +76,14 @@ export default function HostDashboardPage() {
       </div>
 
       {/* KPI Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         <div className="bg-neutral-900/80 border border-neutral-800 p-5 rounded-3xl shadow-sm">
           <div className="flex items-center justify-between text-neutral-400 mb-3">
             <span className="text-xs font-bold uppercase tracking-wider">Managed Spaces</span>
             <Building className="w-4 h-4 text-[#FF007A]" />
           </div>
           <div className="text-2xl font-black text-white">{stats?.workspacesCount || 0}</div>
-          <div className="text-[11px] text-neutral-500 mt-1">{stats?.totalUnits || 0} total inventory units</div>
+          <div className="text-[11px] text-neutral-500 mt-1">{stats?.totalUnits || 0} total units</div>
         </div>
 
         <div className="bg-neutral-900/80 border border-neutral-800 p-5 rounded-3xl shadow-sm">
@@ -85,7 +92,7 @@ export default function HostDashboardPage() {
             <Calendar className="w-4 h-4 text-blue-400" />
           </div>
           <div className="text-2xl font-black text-white">{stats?.totalBookingsCount || 0}</div>
-          <div className="text-[11px] text-emerald-400 mt-1">{stats?.activeBookingsCount || 0} currently active</div>
+          <div className="text-[11px] text-emerald-400 mt-1">{stats?.activeBookingsCount || 0} active now</div>
         </div>
 
         <div className="bg-neutral-900/80 border border-neutral-800 p-5 rounded-3xl shadow-sm">
@@ -96,6 +103,23 @@ export default function HostDashboardPage() {
           <div className="text-2xl font-black text-white">{stats?.upcomingBookingsCount || 0}</div>
           <div className="text-[11px] text-neutral-500 mt-1">Scheduled for this week</div>
         </div>
+
+        <Link
+          href="/host/co-hosts"
+          className="bg-neutral-900/80 hover:bg-neutral-900 border border-neutral-800 hover:border-purple-600/60 p-5 rounded-3xl shadow-sm transition block group"
+        >
+          <div className="flex items-center justify-between text-neutral-400 mb-3">
+            <span className="text-xs font-bold uppercase tracking-wider group-hover:text-purple-400 transition-colors">
+              Co-Host Team
+            </span>
+            <Users className="w-4 h-4 text-purple-400" />
+          </div>
+          <div className="text-2xl font-black text-white">{stats?.cohostsCount || 2} Delegates</div>
+          <div className="text-[11px] text-purple-400 mt-1 flex items-center justify-between">
+            <span>{stats?.pendingInvitesCount || 1} pending invite</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+          </div>
+        </Link>
 
         <div className="bg-neutral-900/80 border border-neutral-800 p-5 rounded-3xl shadow-sm">
           <div className="flex items-center justify-between text-neutral-400 mb-3">
